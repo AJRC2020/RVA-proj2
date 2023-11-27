@@ -9,6 +9,8 @@ public class CaptureController : MonoBehaviour
 
     private Camera cam;
     private RenderTexture rt;
+    private bool isCaptured = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,10 @@ public class CaptureController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CaptureLogic();
+        if (!isCaptured)
+        {
+            CaptureLogic();
+        }
     }
 
     private void CaptureLogic()
@@ -42,6 +47,11 @@ public class CaptureController : MonoBehaviour
         }
 
         float luminosityPercentage = (1 / (luminosityThreshold - 1)) * luminosityLevel - (1 / (luminosityThreshold - 1));
+
+        if (luminosityPercentage == 1)
+        {
+            isCaptured = true;
+        }
 
         Debug.Log("Luminosity Percentage = " + luminosityPercentage * 100 + "%    Luminosity Level = " + luminosityLevel);
     }
