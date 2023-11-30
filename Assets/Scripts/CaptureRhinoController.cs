@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Vuforia;
 
 public class CaptureController : MonoBehaviour
 {
     public float luminosityThreshold = 0.2f;
     public float blackThreshold = 0.1f;
+    public RawImage cameraFeed;
 
     private Camera cam;
     private RenderTexture rt;
@@ -14,11 +17,10 @@ public class CaptureController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject gameObject = new GameObject("");
-        cam = gameObject.AddComponent<Camera>();
-        cam.CopyFrom(GetComponentInParent<Camera>());
+        cam = Camera.main;
         rt = new RenderTexture(Screen.width, Screen.height, 24);
         cam.targetTexture = rt;
+        cameraFeed.texture = rt;
     }
 
     // Update is called once per frame
@@ -34,10 +36,12 @@ public class CaptureController : MonoBehaviour
     {
         cam.Render();
 
-        Texture2D tex = new Texture2D(Screen.width, Screen.height);
+        Texture2D tex = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         RenderTexture.active = rt;
         tex.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
         tex.Apply();
+
+        cameraFeed.texture = tex;
 
         float luminosityLevel = GetLuminosityLevels(tex.GetPixels());
 
@@ -60,16 +64,14 @@ public class CaptureController : MonoBehaviour
     {
         float totalLuminosity = 0;
         int pixelCount = 0;
-        float gamma = 2.2f;
 
         foreach (Color pixel in pixels)
         {
             if (pixel.grayscale > blackThreshold)
             {
                 float linearLuminosity = pixel.grayscale;
-                float gammaCorrectedLuminosity = Mathf.Pow(linearLuminosity, 1 / gamma);
 
-                totalLuminosity += gammaCorrectedLuminosity;
+                totalLuminosity += linearLuminosity;
                 pixelCount++;
             }
         }
