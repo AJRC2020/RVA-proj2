@@ -4,15 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using Vuforia;
 
-public class CaptureController : MonoBehaviour
+public class CaptureRhinoController : MonoBehaviour
 {
     public float luminosityThreshold = 0.2f;
     public float blackThreshold = 0.1f;
     public RawImage cameraFeed;
+    public UnityEngine.UI.Image progressBar;
 
     private Camera cam;
     private RenderTexture rt;
     private bool isCaptured = false;
+    private float luminosityPercentage = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,7 @@ public class CaptureController : MonoBehaviour
         if (!isCaptured)
         {
             CaptureLogic();
+            updateUI();
         }
     }
 
@@ -50,7 +53,7 @@ public class CaptureController : MonoBehaviour
             luminosityLevel = luminosityThreshold;
         }
 
-        float luminosityPercentage = (1 / (luminosityThreshold - 1)) * luminosityLevel - (1 / (luminosityThreshold - 1));
+        luminosityPercentage = (1 / (luminosityThreshold - 1)) * luminosityLevel - (1 / (luminosityThreshold - 1));
 
         if (luminosityPercentage == 1)
         {
@@ -79,5 +82,23 @@ public class CaptureController : MonoBehaviour
         float averagedLuminosity = totalLuminosity / pixelCount;
 
         return averagedLuminosity;
+    }
+
+    private void updateUI()
+    {
+        progressBar.fillAmount = luminosityPercentage;
+        progressBar.color = Color.Lerp(Color.yellow, Color.black, luminosityPercentage);
+    }
+
+    public void Disable()
+    {
+        cam.targetTexture = null;
+        cameraFeed.texture = null;
+    }
+
+    public void Enable()
+    {
+        cam.targetTexture = rt;
+        cameraFeed.texture = rt;
     }
 }
