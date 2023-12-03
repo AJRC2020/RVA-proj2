@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CaptureCactusController : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class CaptureCactusController : MonoBehaviour
     public float fillSpeed = 0.05f;
     public float timeThreshold = 1.0f;
     public float fillPenalty = 0.1f;
+    public Image progressBar;
 
     private float totalFill = 0.0f;
     private float timeLapse = 0.0f;
@@ -16,7 +18,7 @@ public class CaptureCactusController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -25,6 +27,7 @@ public class CaptureCactusController : MonoBehaviour
         if (!isCaptured)
         {
             CaptureLogic();
+            UpdateUI();
         }
     }
 
@@ -57,5 +60,12 @@ public class CaptureCactusController : MonoBehaviour
         }
 
         Debug.Log("Magnitude = " + shakeMag + " Total Fill = " + totalFill);
+    }
+
+    private void UpdateUI()
+    {
+        var purple = new Color(0.5f, 0.0f, 1.0f, 1.0f);
+        progressBar.fillAmount = totalFill;
+        progressBar.color = Color.Lerp(Color.blue, purple, totalFill);
     }
 }

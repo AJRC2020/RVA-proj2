@@ -14,11 +14,13 @@ public class TargetController : MonoBehaviour
     public void EnableMessage()
     {
         message.enabled = true;
+        raw.enabled = false;
     }
 
     public void DisableMessage()
     {
         message.enabled = false;
+        raw.enabled = false;
     }
 
     public void EnableRhinoUI()
@@ -40,6 +42,7 @@ public class TargetController : MonoBehaviour
     public void EnableGeneric()
     {
         message.enabled = false;
+        raw.enabled = false;
         monsterUI.SetActive(true);
         monster.SetActive(true);
     }
@@ -47,6 +50,7 @@ public class TargetController : MonoBehaviour
     public void DisableGeneric()
     {
         message.enabled = true;
+        raw.enabled = false;
         monsterUI.SetActive(false);
         monster.SetActive(false);
     }
