@@ -39,14 +39,14 @@ public class CaptureRhinoController : MonoBehaviour
     {
         cam.Render();
 
-        Texture2D tex = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        Texture2D tex = new Texture2D(Screen.width, Screen.height, TextureFormat.RGBA32, false);
         RenderTexture.active = rt;
         tex.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
         tex.Apply();
 
         cameraFeed.texture = tex;
 
-        float luminosityLevel = GetLuminosityLevels(tex.GetPixels());
+        /*float luminosityLevel = GetLuminosityLevels(tex.GetPixels());
 
         if (luminosityLevel < luminosityThreshold)
         {
@@ -60,7 +60,7 @@ public class CaptureRhinoController : MonoBehaviour
             isCaptured = true;
         }
 
-        Debug.Log("Luminosity Percentage = " + luminosityPercentage * 100 + "%    Luminosity Level = " + luminosityLevel);
+        Debug.Log("Luminosity Percentage = " + luminosityPercentage * 100 + "%    Luminosity Level = " + luminosityLevel);*/
     }
 
     private float GetLuminosityLevels(Color[] pixels)
