@@ -448,13 +448,13 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: transferir
+  mTrackableName: Catctus_Card
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/D1.xml
-  mAspectRatio: 0.6654545
+  mDataSetPath: Vuforia/Phauna-TCG.xml
+  mAspectRatio: 1.537872
   mImageTargetType: 0
-  mWidth: 10
-  mHeight: 6.654545
+  mWidth: 1
+  mHeight: 1.537872
   mRuntimeTexture: {fileID: 0}
   mMotionHint: 1
   mTrackingOptimization: 0
@@ -474,8 +474,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mObserverBehaviour: {fileID: 318442995}
   mHiddenRoot: {fileID: 0}
-  mTargetName: transferir
-  mDatasetName: Vuforia/D1.xml
+  mTargetName: Catctus_Card
+  mDatasetName: Vuforia/Phauna-TCG.xml
   mCastedBehaviour: {fileID: 318442995}
   mMeshFilter: {fileID: 0}
   mMeshRenderer: {fileID: 0}
@@ -631,15 +631,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4444695180855720, guid: f88c6ad57910d8648807bcf0c131f49d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.25
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4444695180855720, guid: f88c6ad57910d8648807bcf0c131f49d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.25
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4444695180855720, guid: f88c6ad57910d8648807bcf0c131f49d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.25
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4444695180855720, guid: f88c6ad57910d8648807bcf0c131f49d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1163,15 +1163,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 421066, guid: 2357bdd96b6ce844fa79e39acd2bdbbc, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 421066, guid: 2357bdd96b6ce844fa79e39acd2bdbbc, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 421066, guid: 2357bdd96b6ce844fa79e39acd2bdbbc, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 421066, guid: 2357bdd96b6ce844fa79e39acd2bdbbc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1524,13 +1524,13 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: pebbles
+  mTrackableName: Rhino_Card
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/D1.xml
-  mAspectRatio: 1
+  mDataSetPath: Vuforia/Phauna-TCG.xml
+  mAspectRatio: 1.537021
   mImageTargetType: 0
-  mWidth: 10
-  mHeight: 10
+  mWidth: 1
+  mHeight: 1.537021
   mRuntimeTexture: {fileID: 0}
   mMotionHint: 1
   mTrackingOptimization: 0
@@ -1565,8 +1565,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mObserverBehaviour: {fileID: 811765618}
   mHiddenRoot: {fileID: 0}
-  mTargetName: pebbles
-  mDatasetName: Vuforia/D1.xml
+  mTargetName: Rhino_Card
+  mDatasetName: Vuforia/Phauna-TCG.xml
   mCastedBehaviour: {fileID: 811765618}
   mMeshFilter: {fileID: 0}
   mMeshRenderer: {fileID: 0}
@@ -1805,15 +1805,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2801,13 +2801,13 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: marker
+  mTrackableName: Beetle_Card
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/D1.xml
-  mAspectRatio: 1
+  mDataSetPath: Vuforia/Phauna-TCG.xml
+  mAspectRatio: 1.539575
   mImageTargetType: 0
-  mWidth: 10
-  mHeight: 10
+  mWidth: 1
+  mHeight: 1.539575
   mRuntimeTexture: {fileID: 0}
   mMotionHint: 1
   mTrackingOptimization: 0
@@ -2827,8 +2827,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mObserverBehaviour: {fileID: 1653504089}
   mHiddenRoot: {fileID: 0}
-  mTargetName: marker
-  mDatasetName: Vuforia/D1.xml
+  mTargetName: Beetle_Card
+  mDatasetName: Vuforia/Phauna-TCG.xml
   mCastedBehaviour: {fileID: 1653504089}
   mMeshFilter: {fileID: 0}
   mMeshRenderer: {fileID: 0}
