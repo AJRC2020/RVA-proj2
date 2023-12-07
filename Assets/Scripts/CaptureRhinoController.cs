@@ -14,8 +14,15 @@ public class CaptureRhinoController : MonoBehaviour
     public float arrowDamage = 0.2f;
 
     private Camera cam;
-    private bool isCaptured = false;
+    private bool isCaptured;
     private float hp = 1;
+    
+    public delegate void AquarhinoCaptured();
+
+    public static event AquarhinoCaptured OnAquarhinoCaptured;
+    
+    public GameObject ArCamera;
+    public GameObject AquarhinoCaptureUI;
 
     // Start is called before the first frame update
     void Start()
@@ -26,9 +33,15 @@ public class CaptureRhinoController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isCaptured)
+        if (!isCaptured && (ArCamera.GetComponent<TargetHandler>().targetsOnScreen.Count == 1))
         {
             updateUI();
+        }else
+        {
+            if (AquarhinoCaptureUI.activeSelf)
+            {
+                AquarhinoCaptureUI.SetActive(false);
+            }
         }
     }
 
@@ -56,6 +69,7 @@ public class CaptureRhinoController : MonoBehaviour
     {
         progressBar.fillAmount = hp;
     }
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -64,5 +78,12 @@ public class CaptureRhinoController : MonoBehaviour
             hp -= arrowDamage;
             Destroy(other.gameObject);
         }
+
+        if (hp <= 0)
+        {
+            isCaptured = true;
+            OnAquarhinoCaptured();
+        }
+        
     }
 }

@@ -11,15 +11,24 @@ public class CaptureInsectController : MonoBehaviour
 
     public Transform parent;
 
+    public GameObject PyroscarabCaptureUI;
+    
     public Image progressBar;
     public Image checkmark;
     public Image cross;
 
     private AudioClip waveAudio;
-    private bool isCaptured = false;
-    private float soundPercentage = 0.0f;
+    private bool isCaptured;
+    private float soundPercentage;
     private float limit1;
     private float limit2;
+    
+    public delegate void PyroscarabCaptured();
+
+    public static event PyroscarabCaptured OnPyroscarabCaptured;
+    
+    public GameObject ArCamera;
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,10 +41,17 @@ public class CaptureInsectController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isCaptured)
+        if (!isCaptured && (ArCamera.GetComponent<TargetHandler>().targetsOnScreen.Count == 1))
         {
             Capture();
             UpdateUI();
+        }
+        else
+        {
+            if (PyroscarabCaptureUI.activeSelf)
+            {
+                PyroscarabCaptureUI.SetActive(false);
+            }
         }
     }
 
@@ -55,6 +71,7 @@ public class CaptureInsectController : MonoBehaviour
             {
                 Debug.Log("Captured Volume = " + volume);
                 isCaptured = true;
+                OnPyroscarabCaptured();
             }
         }
 

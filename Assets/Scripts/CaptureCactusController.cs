@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,22 +12,30 @@ public class CaptureCactusController : MonoBehaviour
 
     private float totalFill = 0.0f;
     private float timeLapse = 0.0f;
-    private bool isCaptured = false;
+    private bool isCaptured;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public delegate void PricklashCaptured();
 
-    }
+    public static event PricklashCaptured OnPricklashCaptured;
 
-    // Update is called once per frame
+    public GameObject ArCamera;
+    public GameObject PricklashCaptureUI;
+    
+
     void Update()
     {
-        if (!isCaptured)
+        if (!isCaptured && (ArCamera.GetComponent<TargetHandler>().targetsOnScreen.Count == 1))
         {
             CaptureLogic();
             UpdateUI();
+        }else
+        {
+            if (PricklashCaptureUI.activeSelf)
+            {
+                PricklashCaptureUI.SetActive(false);
+            }
         }
+
     }
 
     private void CaptureLogic()
@@ -57,10 +64,13 @@ public class CaptureCactusController : MonoBehaviour
         {
             Debug.Log("Captured");
             isCaptured = true;
+            OnPricklashCaptured();
         }
 
         Debug.Log("Magnitude = " + shakeMag + " Total Fill = " + totalFill);
     }
+    
+
 
     private void UpdateUI()
     {
