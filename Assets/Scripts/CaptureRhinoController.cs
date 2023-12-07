@@ -5,7 +5,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Vuforia;
-using static UnityEditor.FilePathAttribute;
 
 public class CaptureRhinoController : MonoBehaviour
 {
