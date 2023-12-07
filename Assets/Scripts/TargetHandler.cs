@@ -16,40 +16,107 @@ public class TargetHandler : MonoBehaviour
     public GameObject PyroscarabMarker;
     public GameObject PricklashMarker;
 
+    public GameObject message;
+
+    public delegate void MultipleTargetsDetected();
+
+    public static event MultipleTargetsDetected onMultipleTargetsDetected;
+
+    public delegate void OneTargetDetected(HashSet<Target> capturedTargets);
+
+    public static event OneTargetDetected onOneTargetDetected;
     
     private void Start()
     {
         targetsOnScreen = new List<Target>();
         capturedTargets = new HashSet<Target>();
-        CaptureCactusController.OnPricklashCaptured += CapturePricklash;
-        CaptureInsectController.OnPyroscarabCaptured += CapturePyroscarab;
-        CaptureRhinoController.OnAquarhinoCaptured += CaptureAquarhin;
+        TargetController.onTargetEnable += EnableTarget;
+        TargetController.onTargetDisabled += DisableTarget;
+        CaptureRhinoController.OnCaptured += OnCaptured;
+        CaptureCactusController.OnCaptured += OnCaptured;
+        CaptureInsectController.OnCaptured += OnCaptured;
     }
-
-    private void OnDisable()
-    {
-        CaptureCactusController.OnPricklashCaptured -= CapturePricklash;
-        CaptureInsectController.OnPyroscarabCaptured -= CapturePyroscarab;
-        CaptureRhinoController.OnAquarhinoCaptured -= CaptureAquarhin;
-    }
-
-    private void OnEnable()
-    {
-        CaptureCactusController.OnPricklashCaptured += CapturePricklash;
-        CaptureInsectController.OnPyroscarabCaptured += CapturePyroscarab;
-        CaptureRhinoController.OnAquarhinoCaptured += CaptureAquarhin;
-    }
-
+    
+        
     private void OnDestroy()
     {
-        CaptureCactusController.OnPricklashCaptured -= CapturePricklash;
-        CaptureInsectController.OnPyroscarabCaptured -= CapturePyroscarab;
-        CaptureRhinoController.OnAquarhinoCaptured -= CaptureAquarhin;
+        TargetController.onTargetEnable -= EnableTarget;
+        TargetController.onTargetDisabled -= DisableTarget;
+        CaptureRhinoController.OnCaptured -= OnCaptured;
+        CaptureCactusController.OnCaptured -= OnCaptured;
+        CaptureInsectController.OnCaptured -= OnCaptured;
+
+    }
+
+    private void EnableTarget(GameObject monsterUI, GameObject monster, Target target)
+    {
+        targetsOnScreen.Add(target);
+        monster.SetActive(true);
+
+        if (targetsOnScreen.Count == 1)
+        {
+            message.SetActive(false);
+
+            if (!capturedTargets.Contains(target))
+            {
+                monsterUI.SetActive(true);
+            }
+        }
+
+        if (targetsOnScreen.Count == 2)
+        {
+            onMultipleTargetsDetected();
+        }
+    }
+
+    private void DisableTarget(GameObject monsterUI, GameObject monster, Target target)
+    {
+        targetsOnScreen.Remove(target);
+        monster.SetActive(false);
+
+        if (monsterUI.activeSelf)
+        {
+            monsterUI.SetActive(false);
+        }
+
+        if (targetsOnScreen.Count == 1)
+        {
+            onOneTargetDetected(capturedTargets);
+        }
+
+        if (targetsOnScreen.Count == 0)
+        {
+            message.SetActive(true);
+        }
+        
+    }
+
+    private void OnCaptured(GameObject monsterUI,Target target)
+    {
+        capturedTargets.Add(target);
+        monsterUI.SetActive(false);
     }
 
     private void Update()
     {
         CheckIfBattle();
+        UpdateMessage();
+    }
+
+
+    private void UpdateMessage()
+    {
+        if (targetsOnScreen.Count == 0)
+        {
+            message.SetActive(true);
+        }
+        else
+        {
+            if (message.activeSelf)
+            {
+                message.SetActive(false);
+            }
+        }
     }
 
 
@@ -58,13 +125,14 @@ public class TargetHandler : MonoBehaviour
         if (target == Target.Phyroscarab)
         {
             return PyroscarabMarker;
-        }else if (target == Target.Aquarhin)
+        }
+        if (target == Target.Aquarhin)
         {
             return AquarhinoMarker;
-
-        } else if (target == Target.Pricklash)
+        } 
+        if (target == Target.Pricklash)
         {
-            return PyroscarabMarker;
+            return PricklashMarker;
         }
 
         return null;
@@ -144,6 +212,7 @@ public class TargetHandler : MonoBehaviour
                             // Card 2 is facing the right way
                         }
                     }
+                    print("Start Battle!!");
                     // TODO: start other scene
                     // The markers are facing each other
                 }
@@ -152,55 +221,4 @@ public class TargetHandler : MonoBehaviour
 
         } 
     }
-
-    public int GetNumberOfTargetsOnScreen()
-    {
-        return targetsOnScreen.Count;
-    }
-
-    private void CaptureAquarhin()
-    {
-        capturedTargets.Add(Target.Aquarhin);
-    }
-
-    public void AddAquarhin()
-    {
-        targetsOnScreen.Add(Target.Aquarhin);
-    }
-    
-    public void RemoveAquarhin()
-    {
-        targetsOnScreen.Remove(Target.Aquarhin);
-    }
-    
-    private void CapturePyroscarab()
-    {
-        capturedTargets.Add(Target.Phyroscarab);
-    }
-    
-    public void AddPyroscarab()
-    {
-        targetsOnScreen.Add(Target.Phyroscarab);
-    }
-    
-    public void RemovePyroscarab()
-    {
-        targetsOnScreen.Remove(Target.Phyroscarab);
-    }
-    
-    private void CapturePricklash()
-    {
-        capturedTargets.Add(Target.Pricklash);
-    }
-    
-    public void AddPricklash()
-    {
-        targetsOnScreen.Add(Target.Pricklash);
-    }
-    
-    public void RemovePricklash()
-    {
-        targetsOnScreen.Remove(Target.Pricklash);
-    }
-    
 }

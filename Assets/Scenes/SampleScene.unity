@@ -362,9 +362,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7813d45925c5f434582b715e856c60ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: {fileID: 528293406}
   monsterUI: {fileID: 1776031518}
   monster: {fileID: 2105770602}
+  target: 1
 --- !u!114 &318442994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,36 +418,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 664383621}
-        m_TargetAssemblyTypeName: TargetHandler, Assembly-CSharp
-        m_MethodName: AddPricklash
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnTargetLost:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 318442993}
         m_TargetAssemblyTypeName: TargetController, Assembly-CSharp
         m_MethodName: DisableGeneric
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 664383621}
-        m_TargetAssemblyTypeName: TargetHandler, Assembly-CSharp
-        m_MethodName: RemovePricklash
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -877,7 +853,6 @@ MonoBehaviour:
   progressBar: {fileID: 57623528}
   checkmark: {fileID: 129798739}
   cross: {fileID: 1392458923}
-  ArCamera: {fileID: 664383615}
 --- !u!1 &664383615
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,6 +992,7 @@ MonoBehaviour:
   AquarhinoMarker: {fileID: 811765615}
   PyroscarabMarker: {fileID: 1653504085}
   PricklashMarker: {fileID: 318442991}
+  message: {fileID: 528293404}
 --- !u!1 &703000921
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,7 +1401,6 @@ MonoBehaviour:
   arrowSpeed: 10
   progressBar: {fileID: 1019461575}
   arrowDamage: 0.2
-  ArCamera: {fileID: 664383615}
   AquarhinoCaptureUI: {fileID: 1054978962}
 --- !u!65 &791546181
 BoxCollider:
@@ -1537,36 +1512,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 664383621}
-        m_TargetAssemblyTypeName: TargetHandler, Assembly-CSharp
-        m_MethodName: AddAquarhin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnTargetLost:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 811765619}
         m_TargetAssemblyTypeName: TargetController, Assembly-CSharp
         m_MethodName: DisableGeneric
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 664383621}
-        m_TargetAssemblyTypeName: TargetHandler, Assembly-CSharp
-        m_MethodName: RemoveAquarhin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1615,9 +1566,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7813d45925c5f434582b715e856c60ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: {fileID: 528293406}
   monsterUI: {fileID: 1054978962}
   monster: {fileID: 765674611}
+  target: 2
 --- !u!114 &811765620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2782,9 +2733,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7813d45925c5f434582b715e856c60ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: {fileID: 528293406}
   monsterUI: {fileID: 87228516}
   monster: {fileID: 424198195}
+  target: 0
 --- !u!114 &1653504088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2838,36 +2789,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 664383621}
-        m_TargetAssemblyTypeName: TargetHandler, Assembly-CSharp
-        m_MethodName: AddPyroscarab
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnTargetLost:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1653504087}
         m_TargetAssemblyTypeName: TargetController, Assembly-CSharp
         m_MethodName: DisableGeneric
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 664383621}
-        m_TargetAssemblyTypeName: TargetHandler, Assembly-CSharp
-        m_MethodName: RemovePyroscarab
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3290,7 +3217,6 @@ MonoBehaviour:
   timeThreshold: 1
   fillPenalty: 0.1
   progressBar: {fileID: 905754383}
-  ArCamera: {fileID: 664383615}
   PricklashCaptureUI: {fileID: 1776031518}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

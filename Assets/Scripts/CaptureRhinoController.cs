@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,11 +18,9 @@ public class CaptureRhinoController : MonoBehaviour
     private bool isCaptured;
     private float hp = 1;
     
-    public delegate void AquarhinoCaptured();
-
-    public static event AquarhinoCaptured OnAquarhinoCaptured;
+    public delegate void Captured(GameObject monsterUI,Target target);
+    public static event Captured OnCaptured;
     
-    public GameObject ArCamera;
     public GameObject AquarhinoCaptureUI;
 
     // Start is called before the first frame update
@@ -33,15 +32,9 @@ public class CaptureRhinoController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isCaptured && (ArCamera.GetComponent<TargetHandler>().targetsOnScreen.Count == 1))
+        if (!isCaptured)
         {
             updateUI();
-        }else
-        {
-            if (AquarhinoCaptureUI.activeSelf)
-            {
-                AquarhinoCaptureUI.SetActive(false);
-            }
         }
     }
 
@@ -59,7 +52,7 @@ public class CaptureRhinoController : MonoBehaviour
 
             arrow.transform.rotation = rotation * tipRightRotation;
 
-            Debug.Log("Direction = " + ray.direction.normalized);
+            //Debug.Log("Direction = " + ray.direction.normalized);
             Rigidbody arrowRb = arrow.GetComponent<Rigidbody>();
             arrowRb.AddForce(ray.direction.normalized * arrowSpeed, ForceMode.Impulse);
         }
@@ -67,7 +60,10 @@ public class CaptureRhinoController : MonoBehaviour
 
     private void updateUI()
     {
-        progressBar.fillAmount = hp;
+        if(AquarhinoCaptureUI.activeSelf)
+        {
+            progressBar.fillAmount = hp;
+        }
     }
     
 
@@ -82,7 +78,7 @@ public class CaptureRhinoController : MonoBehaviour
         if (hp <= 0)
         {
             isCaptured = true;
-            OnAquarhinoCaptured();
+            OnCaptured(AquarhinoCaptureUI, Target.Aquarhin);
         }
         
     }

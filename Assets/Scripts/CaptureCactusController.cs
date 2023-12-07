@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,30 +11,21 @@ public class CaptureCactusController : MonoBehaviour
     public float fillPenalty = 0.1f;
     public Image progressBar;
 
-    private float totalFill = 0.0f;
-    private float timeLapse = 0.0f;
+    private float totalFill;
+    private float timeLapse;
     private bool isCaptured;
 
-    public delegate void PricklashCaptured();
-
-    public static event PricklashCaptured OnPricklashCaptured;
-
-    public GameObject ArCamera;
     public GameObject PricklashCaptureUI;
+    public delegate void Captured(GameObject monsterUI,Target target);
+    public static event Captured OnCaptured;
     
 
     void Update()
     {
-        if (!isCaptured && (ArCamera.GetComponent<TargetHandler>().targetsOnScreen.Count == 1))
+        if (!isCaptured)
         {
             CaptureLogic();
             UpdateUI();
-        }else
-        {
-            if (PricklashCaptureUI.activeSelf)
-            {
-                PricklashCaptureUI.SetActive(false);
-            }
         }
 
     }
@@ -62,20 +54,23 @@ public class CaptureCactusController : MonoBehaviour
 
         if (totalFill == 1.0f)
         {
-            Debug.Log("Captured");
+            //Debug.Log("Captured");
             isCaptured = true;
-            OnPricklashCaptured();
+            OnCaptured(PricklashCaptureUI,Target.Pricklash);
         }
 
-        Debug.Log("Magnitude = " + shakeMag + " Total Fill = " + totalFill);
+        //Debug.Log("Magnitude = " + shakeMag + " Total Fill = " + totalFill);
     }
     
 
 
     private void UpdateUI()
     {
-        var purple = new Color(0.5f, 0.0f, 1.0f, 1.0f);
-        progressBar.fillAmount = totalFill;
-        progressBar.color = Color.Lerp(Color.blue, purple, totalFill);
+        if(PricklashCaptureUI.activeSelf)
+        {
+            var purple = new Color(0.5f, 0.0f, 1.0f, 1.0f);
+            progressBar.fillAmount = totalFill;
+            progressBar.color = Color.Lerp(Color.blue, purple, totalFill);
+        }
     }
 }
