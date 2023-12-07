@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Vuforia;
+using static UnityEditor.FilePathAttribute;
 
 public class CaptureRhinoController : MonoBehaviour
 {
-    public GameObject projectilePrefab;
+    public GameObject arrowPrefab;
     public float arrowSpeed = 10.0f;
     public UnityEngine.UI.Image progressBar;
     public float arrowDamage = 0.2f;
@@ -35,11 +37,19 @@ public class CaptureRhinoController : MonoBehaviour
     {
         if (!isCaptured)
         {
-            GameObject arrow = Instantiate(projectilePrefab, cam.transform.position, Quaternion.identity);
+            Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
-            Vector3 dir = cam.transform.forward;
+            GameObject arrow = Instantiate(arrowPrefab, ray.origin, Quaternion.identity);
 
-            arrow.GetComponent<Rigidbody>().AddForce(dir * arrowSpeed);
+            Quaternion rotation = Quaternion.LookRotation(ray.direction.normalized, Vector3.up);
+
+            Quaternion tipRightRotation = Quaternion.AngleAxis(-90f, rotation * Vector3.forward);
+
+            arrow.transform.rotation = rotation * tipRightRotation;
+
+            Debug.Log("Direction = " + ray.direction.normalized);
+            Rigidbody arrowRb = arrow.GetComponent<Rigidbody>();
+            arrowRb.AddForce(ray.direction.normalized * arrowSpeed, ForceMode.Impulse);
         }
     }
 

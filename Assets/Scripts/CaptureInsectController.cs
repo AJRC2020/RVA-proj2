@@ -7,9 +7,9 @@ public class CaptureInsectController : MonoBehaviour
 {
     public float volumeThreshold = 1.0f;
     public int waveLength = 256;
-    public float behindDistance = -3;
+    public float offsetAngle = 15;
 
-    public Transform camera;
+    public Transform parent;
 
     public Image progressBar;
     public Image checkmark;
@@ -18,11 +18,15 @@ public class CaptureInsectController : MonoBehaviour
     private AudioClip waveAudio;
     private bool isCaptured = false;
     private float soundPercentage = 0.0f;
+    private float limit1;
+    private float limit2;
 
     // Start is called before the first frame update
     void Start()
     {
         StartMicrophone();
+        limit1 = 90 - offsetAngle;
+        limit2 = 270 + offsetAngle;
     }
 
     // Update is called once per frame
@@ -37,7 +41,9 @@ public class CaptureInsectController : MonoBehaviour
 
     void Capture()
     {
-        if (camera.position.z < behindDistance)
+        float y = parent.localRotation.eulerAngles.y;
+
+        if (y < limit1 || y > limit2)
         {
             Debug.Log("Behind");
 
@@ -51,6 +57,8 @@ public class CaptureInsectController : MonoBehaviour
                 isCaptured = true;
             }
         }
+
+        Debug.Log("Y Rotation = " + y);
     }
 
     void StartMicrophone()
@@ -83,7 +91,9 @@ public class CaptureInsectController : MonoBehaviour
 
     void UpdateUI()
     {
-        if (camera.position.z < behindDistance)
+        float y = parent.localRotation.eulerAngles.y;
+
+        if (y < limit1 || y > limit2)
         {
             checkmark.enabled = true;
             cross.enabled = false;

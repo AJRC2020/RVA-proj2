@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9500000}
   - component: {fileID: -7064001230278293406}
   - component: {fileID: 2264488618749418784}
+  - component: {fileID: -8772658169608152650}
   m_Layer: 6
   m_Name: Arrow
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100000}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.70710677, y: 2.7021175e-15, z: 0.00000006181724, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2731774, y: 0.2731774, z: 0.2731774}
   m_ConstrainProportionsScale: 0
@@ -129,7 +130,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -155,3 +156,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.285758, y: 0.09913856, z: 0.39290893}
   m_Center: {x: 0.00000047683716, y: 0.0000000037252903, z: 0.000000007450581}
+--- !u!114 &-8772658169608152650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f1be1c2479c024fb019025664d1371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 5
