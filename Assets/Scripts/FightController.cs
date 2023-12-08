@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class FightController : MonoBehaviour
 {
     private MonsterGeneric monster1;
     private MonsterGeneric monster2;
-    private int turn = 0;
+    private int turn = 1;
     private int winner;
     private bool isOver = false;
     private bool midTurn = false;
@@ -15,7 +16,47 @@ public class FightController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        switch (CaptureInfo.PlayerTarget)
+        {
+            case Target.Aquarhin:
+                GameObject.Find("PlayerCactusTarget").SetActive(false);
+                GameObject.Find("PlayerInsectTarget").SetActive(false);
+                monster1 = GameObject.Find("PlayerRhinoTarget").GetComponentInChildren<FightRhinoController>();
+                break;
+
+            case Target.Pricklash:
+                GameObject.Find("PlayerInsectTarget").SetActive(false);
+                GameObject.Find("PlayerRhinoTarget").SetActive(false);
+                monster1 = GameObject.Find("PlayerCactusTarget").GetComponentInChildren<FightCactusController>();
+                break;
+
+            case Target.Phyroscarab:
+                GameObject.Find("PlayerRhinoTarget").SetActive(false);
+                GameObject.Find("PlayerCactusTarget").SetActive(false);
+                monster1 = GameObject.Find("PlayerInsectTarget").GetComponentInChildren<FightInsectController>();
+                break;
+        }
+
+        switch (CaptureInfo.EnemyTarget)
+        {
+            case Target.Aquarhin:
+                GameObject.Find("EnemyCactusTarget").SetActive(false);
+                GameObject.Find("EnemyInsectTarget").SetActive(false);
+                monster2 = GameObject.Find("EnemyRhinoTarget").GetComponentInChildren<FightRhinoController>();
+                break;
+
+            case Target.Pricklash:
+                GameObject.Find("EnemyInsectTarget").SetActive(false);
+                GameObject.Find("EnemyRhinoTarget").SetActive(false);
+                monster2 = GameObject.Find("EnemyCactusTarget").GetComponentInChildren<FightCactusController>();
+                break;
+
+            case Target.Phyroscarab:
+                GameObject.Find("EnemyRhinoTarget").SetActive(false);
+                GameObject.Find("EnemyCactusTarget").SetActive(false);
+                monster2 = GameObject.Find("EnemyInsectTarget").GetComponentInChildren<FightInsectController>();
+                break;
+        }
     }
 
     // Update is called once per frame
@@ -88,6 +129,8 @@ public class FightController : MonoBehaviour
                 midTurn = true;
             }
         }
+
+        Debug.Log("Player Health = " + monster1.Health + " Enemy Health = " + monster2.Health);
     }
 
     private bool RNG(float threshold)

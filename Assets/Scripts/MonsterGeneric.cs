@@ -29,6 +29,10 @@ public class MonsterGeneric : MonoBehaviour
             if (Random.Range(0, 1) > 0.75f)
             {
                 Health -= (int)(Attack / 2.5f);
+                if (Health < 0)
+                {
+                    Health = 0;
+                }
                 return;
             }
             effectTurns--;
@@ -42,6 +46,11 @@ public class MonsterGeneric : MonoBehaviour
 
         monster.Health -= (int)damage; 
 
+        if (monster.Health < 0)
+        {
+            monster.Health = 0;
+        }
+
         if (attack.hasSpecialEffect) 
         {
             attack.specialEffect?.Invoke(monster);
@@ -50,6 +59,10 @@ public class MonsterGeneric : MonoBehaviour
         if (effectTurns != 0 && effect == "Poisoned")
         {
             Health -= MaxHealth / 7;
+            if (Health < 0)
+            {
+                Health = 0;
+            }
             effectTurns--;
         }
     }
