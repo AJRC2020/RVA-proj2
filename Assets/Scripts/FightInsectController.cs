@@ -34,6 +34,6 @@ public class FightInsectController : MonsterGeneric
             }
         };
 
-        ttacks = new List<MonsterAttack> { attack1, attack2 };
+        Attacks = new List<MonsterAttack> { attack1, attack2 };
     }
 }
