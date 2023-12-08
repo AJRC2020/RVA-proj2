@@ -9,7 +9,7 @@ public class CaptureCactusController : MonoBehaviour
     public float fillSpeed = 0.05f;
     public float timeThreshold = 1.0f;
     public float fillPenalty = 0.1f;
-    public Image progressBar;
+    public Slider progressBar;
 
     private float totalFill;
     private float timeLapse;
@@ -68,9 +68,7 @@ public class CaptureCactusController : MonoBehaviour
     {
         if(PricklashCaptureUI.activeSelf)
         {
-            var purple = new Color(0.5f, 0.0f, 1.0f, 1.0f);
-            progressBar.fillAmount = totalFill;
-            progressBar.color = Color.Lerp(Color.blue, purple, totalFill);
+            progressBar.value = totalFill;
         }
     }
 }
