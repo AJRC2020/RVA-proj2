@@ -213,14 +213,12 @@ public class TargetHandler : MonoBehaviour
                             // Card 2 is facing the right way
                         }
                     }
+                    
+                    // The markers are facing each other
 
                     CaptureInfo.PlayerTarget = playerCard;
                     CaptureInfo.EnemyTarget = enemyCard;
                     SceneManager.LoadScene("FightScene");
-
-
-                    // TODO: start other scene
-                    // The markers are facing each other
                 }
             }
             
