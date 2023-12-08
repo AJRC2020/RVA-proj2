@@ -4,6 +4,7 @@ using System.Linq;
 using DefaultNamespace;
 using UnityEngine;
 using Vector3 = System.Numerics.Vector3;
+using UnityEngine.SceneManagement;
 
 public class TargetHandler : MonoBehaviour
 {
@@ -144,7 +145,7 @@ public class TargetHandler : MonoBehaviour
         if (targetsOnScreen.Count == 2)
         {
             List<Target> playerCards = new List<Target>();
-            Target enemyCard;
+            Target enemyCard = Target.Aquarhin;
             foreach (var target in targetsOnScreen)
             {
                 if (capturedTargets.Contains(target))
@@ -212,7 +213,12 @@ public class TargetHandler : MonoBehaviour
                             // Card 2 is facing the right way
                         }
                     }
-                    print("Start Battle!!");
+
+                    CaptureInfo.PlayerTarget = playerCard;
+                    CaptureInfo.EnemyTarget = enemyCard;
+                    SceneManager.LoadScene("FightScene");
+
+
                     // TODO: start other scene
                     // The markers are facing each other
                 }
