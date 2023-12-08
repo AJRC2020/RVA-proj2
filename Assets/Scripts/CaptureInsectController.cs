@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,9 +15,12 @@ public class CaptureInsectController : MonoBehaviour
 
     public GameObject PyroscarabCaptureUI;
     
-    public Image progressBar;
+    public GameObject progressBarObj;
+    public Slider progressBar;
     public Image checkmark;
     public Image cross;
+    public TextMeshProUGUI BehindTextMeshProUGUI;
+
 
     private AudioClip waveAudio;
     private bool isCaptured;
@@ -103,15 +107,18 @@ public class CaptureInsectController : MonoBehaviour
             if (y < limit1 || y > limit2)
             {
                 checkmark.enabled = true;
+                BehindTextMeshProUGUI.text = "You are behind the Pyroscarab\nMake sound to capture it!";
                 cross.enabled = false;
-                progressBar.fillAmount = soundPercentage;
-                progressBar.color = Color.Lerp(Color.green, Color.red, soundPercentage);
+                progressBarObj.SetActive(true);
+                progressBar.value = soundPercentage;
             }
             else
             {
                 checkmark.enabled = false;
+                BehindTextMeshProUGUI.text = "You cannot capture the Pyroscarab\nTry to ambush it from behind";
+                progressBarObj.SetActive(false);
                 cross.enabled = true;
-                progressBar.fillAmount = 0.0f;
+                progressBar.value = 0.0f;
             }
         }
     }
