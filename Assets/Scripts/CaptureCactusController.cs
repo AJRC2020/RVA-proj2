@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.ComponentModel;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,17 +11,15 @@ public class CaptureCactusController : MonoBehaviour
     public float fillPenalty = 0.1f;
     public Image progressBar;
 
-    private float totalFill = 0.0f;
-    private float timeLapse = 0.0f;
-    private bool isCaptured = false;
+    private float totalFill;
+    private float timeLapse;
+    private bool isCaptured;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public GameObject PricklashCaptureUI;
+    public delegate void Captured(GameObject monsterUI,Target target);
+    public static event Captured OnCaptured;
+    
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (!isCaptured)
@@ -29,6 +27,7 @@ public class CaptureCactusController : MonoBehaviour
             CaptureLogic();
             UpdateUI();
         }
+
     }
 
     private void CaptureLogic()
@@ -55,17 +54,23 @@ public class CaptureCactusController : MonoBehaviour
 
         if (totalFill == 1.0f)
         {
-            Debug.Log("Captured");
+            //Debug.Log("Captured");
             isCaptured = true;
+            OnCaptured(PricklashCaptureUI,Target.Pricklash);
         }
 
-        Debug.Log("Magnitude = " + shakeMag + " Total Fill = " + totalFill);
+        //Debug.Log("Magnitude = " + shakeMag + " Total Fill = " + totalFill);
     }
+    
+
 
     private void UpdateUI()
     {
-        var purple = new Color(0.5f, 0.0f, 1.0f, 1.0f);
-        progressBar.fillAmount = totalFill;
-        progressBar.color = Color.Lerp(Color.blue, purple, totalFill);
+        if(PricklashCaptureUI.activeSelf)
+        {
+            var purple = new Color(0.5f, 0.0f, 1.0f, 1.0f);
+            progressBar.fillAmount = totalFill;
+            progressBar.color = Color.Lerp(Color.blue, purple, totalFill);
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,8 +15,13 @@ public class CaptureRhinoController : MonoBehaviour
     public float arrowDamage = 0.2f;
 
     private Camera cam;
-    private bool isCaptured = false;
+    private bool isCaptured;
     private float hp = 1;
+    
+    public delegate void Captured(GameObject monsterUI,Target target);
+    public static event Captured OnCaptured;
+    
+    public GameObject AquarhinoCaptureUI;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +52,7 @@ public class CaptureRhinoController : MonoBehaviour
 
             arrow.transform.rotation = rotation * tipRightRotation;
 
-            Debug.Log("Direction = " + ray.direction.normalized);
+            //Debug.Log("Direction = " + ray.direction.normalized);
             Rigidbody arrowRb = arrow.GetComponent<Rigidbody>();
             arrowRb.AddForce(ray.direction.normalized * arrowSpeed, ForceMode.Impulse);
         }
@@ -54,8 +60,12 @@ public class CaptureRhinoController : MonoBehaviour
 
     private void updateUI()
     {
-        progressBar.fillAmount = hp;
+        if(AquarhinoCaptureUI.activeSelf)
+        {
+            progressBar.fillAmount = hp;
+        }
     }
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -64,5 +74,12 @@ public class CaptureRhinoController : MonoBehaviour
             hp -= arrowDamage;
             Destroy(other.gameObject);
         }
+
+        if (hp <= 0)
+        {
+            isCaptured = true;
+            OnCaptured(AquarhinoCaptureUI, Target.Aquarhin);
+        }
+        
     }
 }

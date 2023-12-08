@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,15 +12,21 @@ public class CaptureInsectController : MonoBehaviour
 
     public Transform parent;
 
+    public GameObject PyroscarabCaptureUI;
+    
     public Image progressBar;
     public Image checkmark;
     public Image cross;
 
     private AudioClip waveAudio;
-    private bool isCaptured = false;
-    private float soundPercentage = 0.0f;
+    private bool isCaptured;
+    private float soundPercentage;
     private float limit1;
     private float limit2;
+    
+    public delegate void Captured(GameObject monsterUI,Target target);
+    public static event Captured OnCaptured;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +52,6 @@ public class CaptureInsectController : MonoBehaviour
 
         if (y < limit1 || y > limit2)
         {
-            Debug.Log("Behind");
 
             float volume = GetVolume(Microphone.GetPosition(Microphone.devices[0]), waveAudio);
 
@@ -53,12 +59,11 @@ public class CaptureInsectController : MonoBehaviour
 
             if (volume > volumeThreshold)
             {
-                Debug.Log("Captured Volume = " + volume);
                 isCaptured = true;
+                OnCaptured(PyroscarabCaptureUI,Target.Phyroscarab);
             }
         }
 
-        Debug.Log("Y Rotation = " + y);
     }
 
     void StartMicrophone()
@@ -91,20 +96,23 @@ public class CaptureInsectController : MonoBehaviour
 
     void UpdateUI()
     {
-        float y = parent.localRotation.eulerAngles.y;
+        if(PyroscarabCaptureUI.activeSelf)
+        {
+            float y = parent.localRotation.eulerAngles.y;
 
-        if (y < limit1 || y > limit2)
-        {
-            checkmark.enabled = true;
-            cross.enabled = false;
-            progressBar.fillAmount = soundPercentage;
-            progressBar.color = Color.Lerp(Color.green, Color.red, soundPercentage);
-        }
-        else
-        {
-            checkmark.enabled = false;
-            cross.enabled = true;
-            progressBar.fillAmount = 0.0f;
+            if (y < limit1 || y > limit2)
+            {
+                checkmark.enabled = true;
+                cross.enabled = false;
+                progressBar.fillAmount = soundPercentage;
+                progressBar.color = Color.Lerp(Color.green, Color.red, soundPercentage);
+            }
+            else
+            {
+                checkmark.enabled = false;
+                cross.enabled = true;
+                progressBar.fillAmount = 0.0f;
+            }
         }
     }
 }
