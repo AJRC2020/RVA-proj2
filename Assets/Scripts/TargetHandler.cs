@@ -104,7 +104,7 @@ public class TargetHandler : MonoBehaviour
 
     private void OnCaptured(GameObject monsterUI,Target target)
     {
-        capturedMessage.GetComponent<TextMeshProUGUI>().text = "Congratulation!\n\nYou Captured " + (target == Target.Aquarhin ? "an" : "a") + target +".";
+        capturedMessage.GetComponent<TextMeshProUGUI>().text = "Congratulation!\n\nYou Captured " + (target == Target.Aquarhin ? "an " : "a ") + target +".";
         capturedMessage.SetActive(true);
         CaptureInfo.capturedTargets.Add(target);
         monsterUI.SetActive(false);
