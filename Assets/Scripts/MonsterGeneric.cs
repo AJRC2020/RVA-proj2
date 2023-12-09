@@ -16,22 +16,29 @@ public class MonsterGeneric : MonoBehaviour
 
     public string Type { get; set; }
 
-    public int effectTurns { get; set; }
+    public string Name { get; set; }
 
-    public string effect { get; set; }
+    public int EffectTurns { get; set; }
+
+    public string Effect { get; set; }
 
     public List<MonsterAttack> Attacks { get; set; }
 
     public void Fight(int index, MonsterGeneric monster)
     {
-        if (effectTurns != 0 && effect == "Confused") 
+        if (EffectTurns != 0 && Effect == "Confused") 
         {
+            EffectTurns--;
+            Debug.Log(Name + " is Confused");
             if (Random.Range(0, 1) > 0.75f)
             {
                 Health -= (int)(Attack / 2.5f);
+                if (Health < 0)
+                {
+                    Health = 0;
+                }
                 return;
             }
-            effectTurns--;
         }
 
         MonsterAttack attack = Attacks[index];
@@ -40,17 +47,35 @@ public class MonsterGeneric : MonoBehaviour
 
         float damage = CalculateDamage(Attack, attack.Power, defenseModified, Stab(attack.Type));
 
+        Debug.Log(Name + " used " + attack.Name + "\n" + monster.Name + " took " + (int)damage);
+
         monster.Health -= (int)damage; 
 
-        if (attack.hasSpecialEffect) 
+        if (monster.Health < 0)
         {
-            attack.specialEffect?.Invoke(monster);
+            monster.Health = 0;
         }
 
-        if (effectTurns != 0 && effect == "Poisoned")
+        if (attack.HasSpecialEffect) 
         {
-            Health -= MaxHealth / 7;
-            effectTurns--;
+            attack.SpecialEffect?.Invoke(monster);
+        }
+
+        if (EffectTurns != 0 && Effect == "Poisoned")
+        {
+            Health -= MaxHealth / 9;
+            if (Health < 0)
+            {
+                Health = 0;
+            }
+            EffectTurns--;
+
+            Debug.Log(Name + " is poisoned");
+        }
+                
+        if (EffectTurns == 0 && (Effect == "Poisoned" || Effect == "Confused"))
+        {
+            Effect = "None";
         }
     }
 
