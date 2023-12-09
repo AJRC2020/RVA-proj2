@@ -7,7 +7,6 @@ public class DeckController : MonoBehaviour
 
     public GameObject DeckScreen;
     public GameObject Canvas;
-    public GameObject ArCamera;
 
     public UnityEngine.UI.Image Aquarihno;
     public UnityEngine.UI.Image Pyroscarab;
@@ -39,7 +38,7 @@ public class DeckController : MonoBehaviour
         VuforiaBehaviour.Instance.enabled = false;
         DeckScreen.SetActive(true);
         Canvas.SetActive(false);
-        var captured = ArCamera.GetComponentInParent<TargetHandler>().capturedTargets;
+        var captured = CaptureInfo.capturedTargets;
 
         foreach (var cap in captured)
         {
@@ -52,7 +51,7 @@ public class DeckController : MonoBehaviour
                         AquarihnoChanged = true;
                     }
                     break;
-                case Target.Phyroscarab:
+                case Target.Pyroscarab:
                     if(!PyroscarabChanged)
                     {
                         Pyroscarab.sprite = PyroscarabSprite;

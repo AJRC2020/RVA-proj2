@@ -12,9 +12,7 @@ public class TargetHandler : MonoBehaviour
 {
 
     public List<Target> targetsOnScreen;
-
-    public HashSet<Target> capturedTargets;
-
+    
     public GameObject AquarhinoMarker;
     public GameObject PyroscarabMarker;
     public GameObject PricklashMarker;
@@ -25,16 +23,15 @@ public class TargetHandler : MonoBehaviour
 
     public delegate void MultipleTargetsDetected();
 
-    public static event MultipleTargetsDetected onMultipleTargetsDetected;
+    public static event MultipleTargetsDetected OnMultipleTargetsDetected;
 
     public delegate void OneTargetDetected(HashSet<Target> capturedTargets);
 
-    public static event OneTargetDetected onOneTargetDetected;
+    public static event OneTargetDetected OnOneTargetDetected;
     
     private void Start()
     {
         targetsOnScreen = new List<Target>();
-        capturedTargets = new HashSet<Target>();
         TargetController.onTargetEnable += EnableTarget;
         TargetController.onTargetDisabled += DisableTarget;
         CaptureRhinoController.OnCaptured += OnCaptured;
@@ -62,7 +59,7 @@ public class TargetHandler : MonoBehaviour
         {
             detectMessage.SetActive(false);
 
-            if (!capturedTargets.Contains(target))
+            if (!CaptureInfo.capturedTargets.Contains(target))
             {
                 if (capturedMessage.activeSelf)
                 {
@@ -74,7 +71,7 @@ public class TargetHandler : MonoBehaviour
 
         if (targetsOnScreen.Count == 2)
         {
-            onMultipleTargetsDetected();
+            OnMultipleTargetsDetected();
         }
     }
 
@@ -94,7 +91,7 @@ public class TargetHandler : MonoBehaviour
             {
                 capturedMessage.SetActive(false);
             }
-            onOneTargetDetected(capturedTargets);
+            OnOneTargetDetected(CaptureInfo.capturedTargets);
         }
 
         if (targetsOnScreen.Count == 0)
@@ -108,7 +105,7 @@ public class TargetHandler : MonoBehaviour
     {
         capturedMessage.GetComponent<TextMeshProUGUI>().text = "Congratulation!\n\nYou Captured " + (target == Target.Aquarhin ? "an" : "a") + target +".";
         capturedMessage.SetActive(true);
-        capturedTargets.Add(target);
+        CaptureInfo.capturedTargets.Add(target);
         monsterUI.SetActive(false);
         StartCoroutine(DeactivateCapturedImage());
     }
@@ -144,7 +141,7 @@ public class TargetHandler : MonoBehaviour
 
     private GameObject TargetEnumToTargetObject(Target target)
     {
-        if (target == Target.Phyroscarab)
+        if (target == Target.Pyroscarab)
         {
             return PyroscarabMarker;
         }
@@ -169,7 +166,7 @@ public class TargetHandler : MonoBehaviour
             Target enemyCard = Target.Aquarhin;
             foreach (var target in targetsOnScreen)
             {
-                if (capturedTargets.Contains(target))
+                if (CaptureInfo.capturedTargets.Contains(target))
                 {
                     playerCards.Add(target);
                 }
