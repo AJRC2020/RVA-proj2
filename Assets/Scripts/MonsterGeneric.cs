@@ -22,6 +22,8 @@ public class MonsterGeneric : MonoBehaviour
 
     public string Effect { get; set; }
 
+    public Animator Animator { get; set; }
+
     public List<MonsterAttack> Attacks { get; set; }
 
     public void Fight(int index, MonsterGeneric monster)
@@ -41,6 +43,17 @@ public class MonsterGeneric : MonoBehaviour
             }
         }
 
+        switch(index)
+        {
+            case 0:
+                Animator.SetTrigger("Attack1");
+                break;
+
+            case 1:
+                Animator.SetTrigger("Attack2");
+                break;
+        }
+
         MonsterAttack attack = Attacks[index];
 
         float defenseModified = monster.Defense * TypeVariation(attack.Type, monster.Type);
@@ -49,7 +62,8 @@ public class MonsterGeneric : MonoBehaviour
 
         Debug.Log(Name + " used " + attack.Name + "\n" + monster.Name + " took " + (int)damage);
 
-        monster.Health -= (int)damage; 
+        monster.Health -= (int)damage;
+        monster.Animator.SetTrigger("IsHit");
 
         if (monster.Health < 0)
         {
@@ -77,18 +91,6 @@ public class MonsterGeneric : MonoBehaviour
         {
             Effect = "None";
         }
-    }
-
-    public void EnableDefensePosition()
-    {
-        Defense += 5;
-        Attack -= 5;
-    }
-
-    public void DisableDefensePosition()
-    {
-        Defense -= 5;
-        Attack += 5;
     }
 
     float CalculateDamage(int userAttack, int movePower, float enemyDefense, bool hasStab)

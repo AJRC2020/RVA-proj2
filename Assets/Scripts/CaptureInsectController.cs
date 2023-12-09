@@ -27,6 +27,7 @@ public class CaptureInsectController : MonoBehaviour
     private float soundPercentage;
     private float limit1;
     private float limit2;
+    private Animator animator;
     
     public delegate void Captured(GameObject monsterUI,Target target);
     public static event Captured OnCaptured;
@@ -38,6 +39,7 @@ public class CaptureInsectController : MonoBehaviour
         StartMicrophone();
         limit1 = 90 - offsetAngle;
         limit2 = 270 + offsetAngle;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -64,6 +66,7 @@ public class CaptureInsectController : MonoBehaviour
             if (volume > volumeThreshold)
             {
                 isCaptured = true;
+                animator.SetTrigger("Died");
                 OnCaptured(PyroscarabCaptureUI,Target.Phyroscarab);
             }
         }

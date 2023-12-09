@@ -14,6 +14,7 @@ public class FightCactusController : MonsterGeneric
         Speed = 6;
         Type = "Grass";
         Name = "Pricklash";
+        Animator = GetComponent<Animator>();
 
         MonsterAttack attack1 = new MonsterAttack();
         attack1.Type = "Normal";

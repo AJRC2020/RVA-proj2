@@ -14,6 +14,7 @@ public class FightInsectController : MonsterGeneric
         Speed = 10;
         Type = "Fire";
         Name = "Pyroscarab";
+        Animator = GetComponent<Animator>();
 
         MonsterAttack attack1 = new MonsterAttack();
         attack1.Type = "Normal";

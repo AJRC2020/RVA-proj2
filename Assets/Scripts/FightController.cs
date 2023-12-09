@@ -32,6 +32,9 @@ public class FightController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CaptureInfo.PlayerTarget = Target.Phyroscarab;
+        CaptureInfo.EnemyTarget = Target.Pricklash;
+
         switch (CaptureInfo.PlayerTarget)
         {
             case Target.Aquarhin:
@@ -188,11 +191,15 @@ public class FightController : MonoBehaviour
         {
             isOver = true;
             winner = 1;
+            //monster1.Animator.SetBool("IsDead", true);
+            monster1.Animator.SetTrigger("Died");
             return;
         }
         if (monster2.Health == 0)
         {
             isOver = true;
+            //monster2.Animator.SetBool("IsDead", true);
+            monster2.Animator.SetTrigger("Died");
             winner = 2;
             return;
         }
