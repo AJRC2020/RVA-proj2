@@ -16,16 +16,20 @@ public class MonsterGeneric : MonoBehaviour
 
     public string Type { get; set; }
 
-    public int effectTurns { get; set; }
+    public string Name { get; set; }
 
-    public string effect { get; set; }
+    public int EffectTurns { get; set; }
+
+    public string Effect { get; set; }
 
     public List<MonsterAttack> Attacks { get; set; }
 
     public void Fight(int index, MonsterGeneric monster)
     {
-        if (effectTurns != 0 && effect == "Confused") 
+        if (EffectTurns != 0 && Effect == "Confused") 
         {
+            EffectTurns--;
+            Debug.Log(Name + " is Confused");
             if (Random.Range(0, 1) > 0.75f)
             {
                 Health -= (int)(Attack / 2.5f);
@@ -35,7 +39,6 @@ public class MonsterGeneric : MonoBehaviour
                 }
                 return;
             }
-            effectTurns--;
         }
 
         MonsterAttack attack = Attacks[index];
@@ -44,6 +47,8 @@ public class MonsterGeneric : MonoBehaviour
 
         float damage = CalculateDamage(Attack, attack.Power, defenseModified, Stab(attack.Type));
 
+        Debug.Log(Name + " used " + attack.Name + "\n" + monster.Name + " took " + (int)damage);
+
         monster.Health -= (int)damage; 
 
         if (monster.Health < 0)
@@ -51,19 +56,26 @@ public class MonsterGeneric : MonoBehaviour
             monster.Health = 0;
         }
 
-        if (attack.hasSpecialEffect) 
+        if (attack.HasSpecialEffect) 
         {
-            attack.specialEffect?.Invoke(monster);
+            attack.SpecialEffect?.Invoke(monster);
         }
 
-        if (effectTurns != 0 && effect == "Poisoned")
+        if (EffectTurns != 0 && Effect == "Poisoned")
         {
-            Health -= MaxHealth / 7;
+            Health -= MaxHealth / 9;
             if (Health < 0)
             {
                 Health = 0;
             }
-            effectTurns--;
+            EffectTurns--;
+
+            Debug.Log(Name + " is poisoned");
+        }
+                
+        if (EffectTurns == 0 && (Effect == "Poisoned" || Effect == "Confused"))
+        {
+            Effect = "None";
         }
     }
 
