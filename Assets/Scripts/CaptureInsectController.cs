@@ -68,7 +68,7 @@ public class CaptureInsectController : MonoBehaviour
                 isCaptured = true;
 
                 animator.SetTrigger("Died");
-                OnCaptured(PyroscarabCaptureUI,Target.Phyroscarab);
+                OnCaptured(PyroscarabCaptureUI, Target.Pyroscarab);
             }
         }
 
