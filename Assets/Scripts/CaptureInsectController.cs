@@ -45,7 +45,7 @@ public class CaptureInsectController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isCaptured)
+        if (!isCaptured && PyroscarabCaptureUI.activeSelf)
         {
             Capture();
             UpdateUI();
@@ -66,6 +66,7 @@ public class CaptureInsectController : MonoBehaviour
             if (volume > volumeThreshold)
             {
                 isCaptured = true;
+
                 animator.SetTrigger("Died");
                 OnCaptured(PyroscarabCaptureUI,Target.Phyroscarab);
             }

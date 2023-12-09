@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig>
   <Tracking>
+    <ImageTarget name="marke_big" size="1.000000 1.979299" />
     <ImageTarget name="marker" size="1.000000 0.995215" />
     <ImageTarget name="Rhino_Card" size="1.000000 1.537021" />
     <ImageTarget name="Catctus_Card" size="1.000000 1.537872" />

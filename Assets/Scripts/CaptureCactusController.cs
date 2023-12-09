@@ -72,9 +72,6 @@ public class CaptureCactusController : MonoBehaviour
 
     private void UpdateUI()
     {
-        if(PricklashCaptureUI.activeSelf)
-        {
-            progressBar.value = totalFill;
-        }
+        progressBar.value = totalFill;
     }
 }

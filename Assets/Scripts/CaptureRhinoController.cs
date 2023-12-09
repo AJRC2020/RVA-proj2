@@ -62,10 +62,7 @@ public class CaptureRhinoController : MonoBehaviour
 
     private void updateUI()
     {
-        if(AquarhinoCaptureUI.activeSelf)
-        {
-            progressBar.value = hp;
-        }
+        progressBar.value = hp;
     }
     
 
