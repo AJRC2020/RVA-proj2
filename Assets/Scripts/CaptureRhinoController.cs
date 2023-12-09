@@ -11,7 +11,7 @@ public class CaptureRhinoController : MonoBehaviour
 {
     public GameObject arrowPrefab;
     public float arrowSpeed = 10.0f;
-    public UnityEngine.UI.Image progressBar;
+    public Slider progressBar;
     public float arrowDamage = 0.2f;
 
     private Camera cam;
@@ -62,7 +62,7 @@ public class CaptureRhinoController : MonoBehaviour
     {
         if(AquarhinoCaptureUI.activeSelf)
         {
-            progressBar.fillAmount = hp;
+            progressBar.value = hp;
         }
     }
     

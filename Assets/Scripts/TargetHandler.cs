@@ -1,9 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
+using TMPro;
 using UnityEngine;
 using Vector3 = System.Numerics.Vector3;
+using UnityEngine.SceneManagement;
 
 public class TargetHandler : MonoBehaviour
 {
@@ -16,7 +19,9 @@ public class TargetHandler : MonoBehaviour
     public GameObject PyroscarabMarker;
     public GameObject PricklashMarker;
 
-    public GameObject message;
+    public GameObject detectMessage;
+    public GameObject capturedMessage;
+
 
     public delegate void MultipleTargetsDetected();
 
@@ -55,10 +60,14 @@ public class TargetHandler : MonoBehaviour
 
         if (targetsOnScreen.Count == 1)
         {
-            message.SetActive(false);
+            detectMessage.SetActive(false);
 
             if (!capturedTargets.Contains(target))
             {
+                if (capturedMessage.activeSelf)
+                {
+                    capturedMessage.SetActive(false);
+                }
                 monsterUI.SetActive(true);
             }
         }
@@ -81,20 +90,33 @@ public class TargetHandler : MonoBehaviour
 
         if (targetsOnScreen.Count == 1)
         {
+            if (capturedMessage.activeSelf)
+            {
+                capturedMessage.SetActive(false);
+            }
             onOneTargetDetected(capturedTargets);
         }
 
         if (targetsOnScreen.Count == 0)
         {
-            message.SetActive(true);
+            detectMessage.SetActive(true);
         }
         
     }
 
     private void OnCaptured(GameObject monsterUI,Target target)
     {
+        capturedMessage.GetComponent<TextMeshProUGUI>().text = "Congratulation!\n\nYou Captured " + (target == Target.Aquarhin ? "an" : "a") + target +".";
+        capturedMessage.SetActive(true);
         capturedTargets.Add(target);
         monsterUI.SetActive(false);
+        StartCoroutine(DeactivateCapturedImage());
+    }
+
+    IEnumerator DeactivateCapturedImage()
+    {
+        yield return new WaitForSeconds(3);
+        capturedMessage.SetActive(false);
     }
 
     private void Update()
@@ -108,13 +130,13 @@ public class TargetHandler : MonoBehaviour
     {
         if (targetsOnScreen.Count == 0)
         {
-            message.SetActive(true);
+            detectMessage.SetActive(true);
         }
         else
         {
-            if (message.activeSelf)
+            if (detectMessage.activeSelf)
             {
-                message.SetActive(false);
+                detectMessage.SetActive(false);
             }
         }
     }
@@ -144,7 +166,7 @@ public class TargetHandler : MonoBehaviour
         if (targetsOnScreen.Count == 2)
         {
             List<Target> playerCards = new List<Target>();
-            Target enemyCard;
+            Target enemyCard = Target.Aquarhin;
             foreach (var target in targetsOnScreen)
             {
                 if (capturedTargets.Contains(target))
@@ -212,9 +234,12 @@ public class TargetHandler : MonoBehaviour
                             // Card 2 is facing the right way
                         }
                     }
-                    print("Start Battle!!");
-                    // TODO: start other scene
+                    
                     // The markers are facing each other
+
+                    CaptureInfo.PlayerTarget = playerCard;
+                    CaptureInfo.EnemyTarget = enemyCard;
+                    SceneManager.LoadScene("FightScene");
                 }
             }
             
