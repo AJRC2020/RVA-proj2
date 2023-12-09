@@ -22,7 +22,7 @@ public class CaptureCactusController : MonoBehaviour
 
     void Update()
     {
-        if (!isCaptured && PricklashCaptureUI.activeSelf)
+        if (!isCaptured)
         {
             CaptureLogic();
             UpdateUI();
@@ -58,6 +58,8 @@ public class CaptureCactusController : MonoBehaviour
             isCaptured = true;
             OnCaptured(PricklashCaptureUI,Target.Pricklash);
         }
+
+        //Debug.Log("Magnitude = " + shakeMag + " Total Fill = " + totalFill);
     }
     
 

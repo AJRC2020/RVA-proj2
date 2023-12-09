@@ -213,7 +213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &87228517
 RectTransform:
   m_ObjectHideFlags: 0
@@ -504,7 +504,8 @@ MonoBehaviour:
   m_text: 'Health:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 318425451e38daa4c86088a5e20da769, type: 2}
-  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769, type: 2}
+  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -643,7 +644,8 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 318425451e38daa4c86088a5e20da769, type: 2}
-  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769, type: 2}
+  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -942,7 +944,8 @@ MonoBehaviour:
   m_text: 'Shake:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 318425451e38daa4c86088a5e20da769, type: 2}
-  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769, type: 2}
+  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1088,7 +1091,8 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1128758269040250, guid: f88c6ad57910d8648807bcf0c131f49d, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 1128758269040250, guid: f88c6ad57910d8648807bcf0c131f49d,
+        type: 3}
       insertIndex: -1
       addedObject: {fileID: 663768074}
   m_SourcePrefab: {fileID: 100100000, guid: f88c6ad57910d8648807bcf0c131f49d, type: 3}
@@ -1130,7 +1134,8 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &424198195 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1128758269040250, guid: f88c6ad57910d8648807bcf0c131f49d, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1128758269040250, guid: f88c6ad57910d8648807bcf0c131f49d,
+    type: 3}
   m_PrefabInstance: {fileID: 328418698}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &464161393
@@ -1345,7 +1350,8 @@ MonoBehaviour:
   m_text: There are no monster cards In the field of view
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 318425451e38daa4c86088a5e20da769, type: 2}
-  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769, type: 2}
+  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1479,7 +1485,8 @@ MonoBehaviour:
   m_text: Aquarihno
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 318425451e38daa4c86088a5e20da769, type: 2}
-  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769, type: 2}
+  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1555,7 +1562,8 @@ CanvasRenderer:
   m_CullTransparentMesh: 1
 --- !u!4 &663768072 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4444695180855720, guid: f88c6ad57910d8648807bcf0c131f49d, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4444695180855720, guid: f88c6ad57910d8648807bcf0c131f49d,
+    type: 3}
   m_PrefabInstance: {fileID: 328418698}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &663768074
@@ -2134,16 +2142,19 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 153050, guid: 2357bdd96b6ce844fa79e39acd2bdbbc, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 153050, guid: 2357bdd96b6ce844fa79e39acd2bdbbc,
+        type: 3}
       insertIndex: -1
       addedObject: {fileID: 791546179}
-    - targetCorrespondingSourceObject: {fileID: 153050, guid: 2357bdd96b6ce844fa79e39acd2bdbbc, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 153050, guid: 2357bdd96b6ce844fa79e39acd2bdbbc,
+        type: 3}
       insertIndex: -1
       addedObject: {fileID: 791546181}
   m_SourcePrefab: {fileID: 100100000, guid: 2357bdd96b6ce844fa79e39acd2bdbbc, type: 3}
 --- !u!1 &765674611 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 153050, guid: 2357bdd96b6ce844fa79e39acd2bdbbc, type: 3}
+  m_CorrespondingSourceObject: {fileID: 153050, guid: 2357bdd96b6ce844fa79e39acd2bdbbc,
+    type: 3}
   m_PrefabInstance: {fileID: 765674610}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &767558543
@@ -2184,7 +2195,8 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &791546178 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 421066, guid: 2357bdd96b6ce844fa79e39acd2bdbbc, type: 3}
+  m_CorrespondingSourceObject: {fileID: 421066, guid: 2357bdd96b6ce844fa79e39acd2bdbbc,
+    type: 3}
   m_PrefabInstance: {fileID: 765674610}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &791546179
@@ -2398,63 +2410,78 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 318442992}
     m_Modifications:
-    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       propertyPath: m_LocalScale.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       propertyPath: m_LocalScale.z
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - target: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 662468794185850985, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - target: {fileID: 662468794185850985, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       propertyPath: m_Name
       value: CactusPBR
       objectReference: {fileID: 0}
-    - target: {fileID: 662468794185850985, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - target: {fileID: 662468794185850985, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -2462,7 +2489,8 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 662468794185850985, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 662468794185850985, guid: a48631e259d0486fa83621f7d8f36e72,
+        type: 3}
       insertIndex: -1
       addedObject: {fileID: 2105770605}
   m_SourcePrefab: {fileID: 100100000, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
@@ -3232,7 +3260,8 @@ MonoBehaviour:
   m_text: 'Captured Monsters Deck:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 318425451e38daa4c86088a5e20da769, type: 2}
-  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769, type: 2}
+  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3366,7 +3395,8 @@ MonoBehaviour:
   m_text: Pricklash
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 318425451e38daa4c86088a5e20da769, type: 2}
-  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769, type: 2}
+  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3500,7 +3530,8 @@ MonoBehaviour:
   m_text: 'Volume:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 318425451e38daa4c86088a5e20da769, type: 2}
-  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769, type: 2}
+  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4144,7 +4175,8 @@ MonoBehaviour:
   m_text: Pyroscarab
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 318425451e38daa4c86088a5e20da769, type: 2}
-  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769, type: 2}
+  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4251,7 +4283,7 @@ RectTransform:
   m_Father: {fileID: 371607344}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4387,7 +4419,8 @@ MonoBehaviour:
   m_text: Shake your phone to capture Pricklash.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 318425451e38daa4c86088a5e20da769, type: 2}
-  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769, type: 2}
+  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4800,7 +4833,8 @@ MonoBehaviour:
     Try to ambush it from behind'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 318425451e38daa4c86088a5e20da769, type: 2}
-  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769, type: 2}
+  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4876,12 +4910,14 @@ CanvasRenderer:
   m_CullTransparentMesh: 1
 --- !u!1 &2105770602 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 662468794185850985, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+  m_CorrespondingSourceObject: {fileID: 662468794185850985, guid: a48631e259d0486fa83621f7d8f36e72,
+    type: 3}
   m_PrefabInstance: {fileID: 995918131}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2105770603 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
+  m_CorrespondingSourceObject: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72,
+    type: 3}
   m_PrefabInstance: {fileID: 995918131}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2105770605
@@ -4962,7 +4998,8 @@ MonoBehaviour:
   m_text: Shoot the Aquarin to capture it!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 318425451e38daa4c86088a5e20da769, type: 2}
-  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769, type: 2}
+  m_sharedMaterial: {fileID: 4392511573676298229, guid: 318425451e38daa4c86088a5e20da769,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

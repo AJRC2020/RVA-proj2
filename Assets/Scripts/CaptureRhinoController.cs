@@ -32,7 +32,7 @@ public class CaptureRhinoController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isCaptured && AquarhinoCaptureUI.activeSelf)
+        if (!isCaptured)
         {
             updateUI();
         }
