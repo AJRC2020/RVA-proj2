@@ -14,11 +14,16 @@ public class CaptureCactusController : MonoBehaviour
     private float totalFill;
     private float timeLapse;
     private bool isCaptured;
+    private Animator animator;
 
     public GameObject PricklashCaptureUI;
     public delegate void Captured(GameObject monsterUI,Target target);
     public static event Captured OnCaptured;
-    
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     void Update()
     {
@@ -56,6 +61,7 @@ public class CaptureCactusController : MonoBehaviour
         {
             //Debug.Log("Captured");
             isCaptured = true;
+            animator.SetTrigger("Died");
             OnCaptured(PricklashCaptureUI,Target.Pricklash);
         }
 
