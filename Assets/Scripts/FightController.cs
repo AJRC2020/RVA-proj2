@@ -32,9 +32,6 @@ public class FightController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CaptureInfo.PlayerTarget = Target.Phyroscarab;
-        CaptureInfo.EnemyTarget = Target.Aquarhin;
-
         switch (CaptureInfo.PlayerTarget)
         {
             case Target.Aquarhin:
