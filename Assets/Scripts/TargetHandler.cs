@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using Vector3 = System.Numerics.Vector3;
 using UnityEngine.SceneManagement;
+using Vuforia;
 
 public class TargetHandler : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class TargetHandler : MonoBehaviour
     
     private void Start()
     {
+        VuforiaBehaviour.Instance.enabled = true;
+
         targetsOnScreen = new List<Target>();
         TargetController.onTargetEnable += EnableTarget;
         TargetController.onTargetDisabled += DisableTarget;
@@ -42,6 +45,8 @@ public class TargetHandler : MonoBehaviour
         
     private void OnDestroy()
     {
+        VuforiaBehaviour.Instance.enabled = false;
+
         TargetController.onTargetEnable -= EnableTarget;
         TargetController.onTargetDisabled -= DisableTarget;
         CaptureRhinoController.OnCaptured -= OnCaptured;
@@ -237,6 +242,7 @@ public class TargetHandler : MonoBehaviour
                     CaptureInfo.PlayerTarget = playerCard;
                     CaptureInfo.EnemyTarget = enemyCard;
                     SceneManager.LoadScene("FightScene");
+                    VuforiaBehaviour.Instance.enabled = false;
                 }
             }
             

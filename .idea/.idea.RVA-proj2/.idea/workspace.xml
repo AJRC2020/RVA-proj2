@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6eef7660-3ed7-4964-94ee-36a5c74854c0" name="Changes" comment="" />
+    <list default="true" id="6eef7660-3ed7-4964-94ee-36a5c74854c0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RVA-proj2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RVA-proj2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/FightScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/FightScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FightController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FightController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TargetHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TargetHandler.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -110,7 +115,7 @@
       <option name="presentableId" value="Default" />
       <updated>1702132190721</updated>
       <workItem from="1702132193157" duration="1075000" />
-      <workItem from="1702133764949" duration="5791000" />
+      <workItem from="1702133764949" duration="6494000" />
     </task>
     <servers />
   </component>
