@@ -11,7 +11,9 @@ public class MonsterAttack : MonoBehaviour
 
     public string Type { get; set; }
 
-    public bool hasSpecialEffect { get; set; }
+    public string Name { get; set; }
 
-    public Action<MonsterGeneric> specialEffect { get; set; }
+    public bool HasSpecialEffect { get; set; }
+
+    public Action<MonsterGeneric> SpecialEffect { get; set; }
 }

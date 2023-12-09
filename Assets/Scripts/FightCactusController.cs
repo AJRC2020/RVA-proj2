@@ -7,28 +7,31 @@ public class FightCactusController : MonsterGeneric
     // Start is called before the first frame update
     void Start()
     {
-        Health = 130;
-        MaxHealth = 130;
+        Health = 120;
+        MaxHealth = 120;
         Attack = 17;
-        Defense = 8;
+        Defense = 7;
         Speed = 6;
         Type = "Grass";
+        Name = "Pricklash";
 
         MonsterAttack attack1 = new MonsterAttack();
         attack1.Type = "Normal";
         attack1.Slots = 10;
         attack1.Power = 15;
-        attack1.hasSpecialEffect = false;
+        attack1.HasSpecialEffect = false;
+        attack1.Name = "Punch";
 
         MonsterAttack attack2 = new MonsterAttack();
         attack2.Type = "Grass";
         attack2.Slots = 4;
         attack2.Power = 8;
-        attack2.hasSpecialEffect = true;
-        attack2.specialEffect = (enemy) =>
+        attack2.Name = "Venom";
+        attack2.HasSpecialEffect = true;
+        attack2.SpecialEffect = (enemy) =>
         {
-            enemy.effect = "Poisoned";
-            enemy.effectTurns = 5;
+            enemy.Effect = "Poisoned";
+            enemy.EffectTurns = 5;
         };
 
         Attacks = new List<MonsterAttack> { attack1, attack2 };
