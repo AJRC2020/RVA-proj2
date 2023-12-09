@@ -7,8 +7,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Vuforia;
-using Image = UnityEngine.UI.Image;
 using Random = UnityEngine.Random;
 
 public class FightController : MonoBehaviour
@@ -143,7 +141,6 @@ public class FightController : MonoBehaviour
     public void RunAway()
     {
         SceneManager.LoadScene("SampleScene");
-        VuforiaBehaviour.Instance.enabled = false;
 
     }
 
@@ -156,7 +153,6 @@ public class FightController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        VuforiaBehaviour.Instance.enabled = true;
         _player = CaptureInfo.PlayerTarget;
         _enemy = CaptureInfo.EnemyTarget;
         _targetsOnScreen.Add(_player);
