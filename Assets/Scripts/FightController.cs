@@ -33,7 +33,7 @@ public class FightController : MonoBehaviour
     void Start()
     {
         CaptureInfo.PlayerTarget = Target.Phyroscarab;
-        CaptureInfo.EnemyTarget = Target.Pricklash;
+        CaptureInfo.EnemyTarget = Target.Aquarhin;
 
         switch (CaptureInfo.PlayerTarget)
         {
@@ -91,9 +91,9 @@ public class FightController : MonoBehaviour
         {
             if (!isOver)
             {
-                CheckHealth();
                 FightTurn();
                 UpdateUI();
+                CheckHealth();
             }
 
             timeout = 1.5f;
@@ -165,7 +165,7 @@ public class FightController : MonoBehaviour
             }
         }
 
-        Debug.Log("Player Health = " + monster1.Health + " Enemy Health = " + monster2.Health);
+        //Debug.Log("Player Health = " + monster1.Health + " Enemy Health = " + monster2.Health);
     }
 
     private bool RNG(float threshold)
@@ -191,15 +191,13 @@ public class FightController : MonoBehaviour
         {
             isOver = true;
             winner = 1;
-            //monster1.Animator.SetBool("IsDead", true);
-            monster1.Animator.SetTrigger("Died");
+            monster1.Animator.SetBool("IsDead", true);
             return;
         }
         if (monster2.Health == 0)
         {
             isOver = true;
-            //monster2.Animator.SetBool("IsDead", true);
-            monster2.Animator.SetTrigger("Died");
+            monster2.Animator.SetBool("IsDead", true);
             winner = 2;
             return;
         }

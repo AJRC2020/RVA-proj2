@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class MonsterGeneric : MonoBehaviour
@@ -31,7 +32,7 @@ public class MonsterGeneric : MonoBehaviour
         if (EffectTurns != 0 && Effect == "Confused") 
         {
             EffectTurns--;
-            Debug.Log(Name + " is Confused");
+            //Debug.Log(Name + " is Confused");
             if (Random.Range(0, 1) > 0.75f)
             {
                 Health -= (int)(Attack / 2.5f);
@@ -60,7 +61,7 @@ public class MonsterGeneric : MonoBehaviour
 
         float damage = CalculateDamage(Attack, attack.Power, defenseModified, Stab(attack.Type));
 
-        Debug.Log(Name + " used " + attack.Name + "\n" + monster.Name + " took " + (int)damage);
+        //Debug.Log(Name + " used " + attack.Name + "\n" + monster.Name + " took " + (int)damage);
 
         monster.Health -= (int)damage;
         monster.Animator.SetTrigger("IsHit");
@@ -84,7 +85,7 @@ public class MonsterGeneric : MonoBehaviour
             }
             EffectTurns--;
 
-            Debug.Log(Name + " is poisoned");
+            //Debug.Log(Name + " is poisoned");
         }
                 
         if (EffectTurns == 0 && (Effect == "Poisoned" || Effect == "Confused"))
