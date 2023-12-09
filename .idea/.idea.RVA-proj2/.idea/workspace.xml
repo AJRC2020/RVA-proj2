@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6eef7660-3ed7-4964-94ee-36a5c74854c0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CaptureCactusController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CaptureCactusController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CaptureRhinoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CaptureRhinoController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/DistanceUtils.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/DistanceUtils.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RVA-proj2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RVA-proj2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/FightScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/FightScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FightController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FightController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TargetHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TargetHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/Berlin Sans FB Demi Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/Berlin Sans FB Demi Bold SDF.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,32 +23,22 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c764018aa4484af49ae840fbd4bf43a552000/e8/0ce4fc48/Command.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Joana/Documents/Uni/Ano_5/RVA/rva-proj2/RVA-proj2/Assets/Scenes/SampleScene.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Joana/Documents/Uni/Ano_5/RVA/rva-proj2/RVA-proj2/Assets/Scenes/SampleScene.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraSettings.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Joana/Documents/Uni/Ano_5/RVA/rva-proj2/RVA-proj2/Assets/Scripts/CaptureCactusController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Joana/Documents/Uni/Ano_5/RVA/rva-proj2/RVA-proj2/Assets/Scripts/CaptureCactusController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Joana/Documents/Uni/Ano_5/RVA/rva-proj2/RVA-proj2/Assets/Scripts/CaptureCactusController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Joana/Documents/Uni/Ano_5/RVA/rva-proj2/RVA-proj2/Assets/Scripts/CaptureCactusController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CaptureCactusController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Joana/Documents/Uni/Ano_5/RVA/rva-proj2/RVA-proj2/Assets/Scripts/CaptureCactusController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Joana/Documents/Uni/Ano_5/RVA/rva-proj2/RVA-proj2/Assets/Scripts/CaptureCactusController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CaptureInsectController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Joana/Documents/Uni/Ano_5/RVA/rva-proj2/RVA-proj2/Assets/Scripts/CaptureRhinoController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Joana/Documents/Uni/Ano_5/RVA/rva-proj2/RVA-proj2/Assets/Scripts/CaptureRhinoController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CaptureRhinoController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LegacyCaptureRhinoController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Target.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TargetController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/TargetHandler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/TargetHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/Canvas/AssertionFailureOnOutputVertexCount.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Canvas/CanvasScalerWithChildTextObjectDoesNotCrash.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2ZJFHeuhpFWeDxRUIl64V8KpYuY" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -54,7 +48,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "Run-Away",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -124,6 +118,7 @@
       <option name="presentableId" value="Default" />
       <updated>1702132190721</updated>
       <workItem from="1702132193157" duration="1075000" />
+      <workItem from="1702133764949" duration="14576000" />
     </task>
     <servers />
   </component>

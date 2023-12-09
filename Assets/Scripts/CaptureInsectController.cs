@@ -64,7 +64,7 @@ public class CaptureInsectController : MonoBehaviour
             if (volume > volumeThreshold)
             {
                 isCaptured = true;
-                OnCaptured(PyroscarabCaptureUI,Target.Phyroscarab);
+                OnCaptured(PyroscarabCaptureUI,Target.Pyroscarab);
             }
         }
 

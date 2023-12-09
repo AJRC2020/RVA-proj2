@@ -21,27 +21,27 @@ public class TargetController : MonoBehaviour
 
     private void Start()
     {
-        TargetHandler.onMultipleTargetsDetected += OnMultipleTargetsDetected;
-        TargetHandler.onOneTargetDetected += OnOneTargetDetected;
+        TargetHandler.OnMultipleTargetsDetected += OnMultipleTargetsDetected;
+        TargetHandler.OnOneTargetDetected += OnOneTargetDetected;
     }
 
     private void OnEnable()
     {
-        TargetHandler.onMultipleTargetsDetected += OnMultipleTargetsDetected;
-        TargetHandler.onOneTargetDetected += OnOneTargetDetected;
+        TargetHandler.OnMultipleTargetsDetected += OnMultipleTargetsDetected;
+        TargetHandler.OnOneTargetDetected += OnOneTargetDetected;
 
     }
 
     private void OnDisable()
     {
-        TargetHandler.onMultipleTargetsDetected -= OnMultipleTargetsDetected;
-        TargetHandler.onOneTargetDetected -= OnOneTargetDetected;
+        TargetHandler.OnMultipleTargetsDetected -= OnMultipleTargetsDetected;
+        TargetHandler.OnOneTargetDetected -= OnOneTargetDetected;
     }
 
     private void OnDestroy()
     {
-        TargetHandler.onMultipleTargetsDetected -= OnMultipleTargetsDetected;
-        TargetHandler.onOneTargetDetected -= OnOneTargetDetected;
+        TargetHandler.OnMultipleTargetsDetected -= OnMultipleTargetsDetected;
+        TargetHandler.OnOneTargetDetected -= OnOneTargetDetected;
     }
 
 

@@ -2,7 +2,7 @@
 {
     public enum Target
     {
-        Phyroscarab, Pricklash, Aquarhin 
+        Pyroscarab, Pricklash, Aquarhin 
     
     }
 }
