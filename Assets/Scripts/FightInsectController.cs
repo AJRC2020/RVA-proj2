@@ -15,14 +15,14 @@ public class FightInsectController : MonsterGeneric
         Type = "Fire";
         Name = "Pyroscarab";
 
-        MonsterAttack attack1 = new MonsterAttack();
+        var attack1 = gameObject.AddComponent<MonsterAttack>();
         attack1.Type = "Normal";
         attack1.Slots = 10;
         attack1.Power = 10;
         attack1.HasSpecialEffect = false;
         attack1.Name = "Smash";
 
-        MonsterAttack attack2 = new MonsterAttack();
+        var attack2 = gameObject.AddComponent<MonsterAttack>();
         attack2.Type = "Fire";
         attack2.Slots = 5;
         attack2.Power = 13;

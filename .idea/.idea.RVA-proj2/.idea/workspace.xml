@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6eef7660-3ed7-4964-94ee-36a5c74854c0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RVA-proj2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RVA-proj2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/VuforiaConfiguration.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/VuforiaConfiguration.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/FightScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/FightScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CaptureInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CaptureInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CaptureInsectController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CaptureInsectController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FightCactusController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FightCactusController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FightController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FightController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Target.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Target.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TargetHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TargetHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/DeckController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/DeckController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/Berlin Sans FB Demi Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/Berlin Sans FB Demi Bold SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QCAR/somedata16" beforeDir="false" afterPath="$PROJECT_DIR$/QCAR/somedata16" afterDir="false" />
-    </list>
+    <list default="true" id="6eef7660-3ed7-4964-94ee-36a5c74854c0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,7 +40,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Run-Away",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -125,7 +110,7 @@
       <option name="presentableId" value="Default" />
       <updated>1702132190721</updated>
       <workItem from="1702132193157" duration="1075000" />
-      <workItem from="1702133764949" duration="5480000" />
+      <workItem from="1702133764949" duration="5791000" />
     </task>
     <servers />
   </component>
