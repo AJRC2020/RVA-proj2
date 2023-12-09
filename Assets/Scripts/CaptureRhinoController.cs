@@ -32,7 +32,7 @@ public class CaptureRhinoController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isCaptured)
+        if (!isCaptured && AquarhinoCaptureUI.activeSelf)
         {
             updateUI();
         }
@@ -60,10 +60,7 @@ public class CaptureRhinoController : MonoBehaviour
 
     private void updateUI()
     {
-        if(AquarhinoCaptureUI.activeSelf)
-        {
-            progressBar.value = hp;
-        }
+        progressBar.value = hp;
     }
     
 

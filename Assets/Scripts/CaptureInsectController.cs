@@ -43,7 +43,7 @@ public class CaptureInsectController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isCaptured)
+        if (!isCaptured && PyroscarabCaptureUI.activeSelf)
         {
             Capture();
             UpdateUI();
