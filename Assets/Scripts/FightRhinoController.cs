@@ -14,6 +14,7 @@ public class FightRhinoController : MonsterGeneric
         Speed = 8;
         Type = "Water";
         Name = "Aquarhin";
+        Animator = GetComponent<Animator>();
         
         var attack1 = gameObject.AddComponent<MonsterAttack>();
         attack1.Type = "Normal";

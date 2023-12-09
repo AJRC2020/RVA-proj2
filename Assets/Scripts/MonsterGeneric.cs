@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class MonsterGeneric : MonoBehaviour
@@ -22,6 +23,8 @@ public class MonsterGeneric : MonoBehaviour
 
     public string Effect { get; set; }
 
+    public Animator Animator { get; set; }
+
     public List<MonsterAttack> Attacks { get; set; }
 
     public void Fight(int index, MonsterGeneric monster)
@@ -29,7 +32,7 @@ public class MonsterGeneric : MonoBehaviour
         if (EffectTurns != 0 && Effect == "Confused") 
         {
             EffectTurns--;
-            Debug.Log(Name + " is Confused");
+            //Debug.Log(Name + " is Confused");
             if (Random.Range(0, 1) > 0.75f)
             {
                 Health -= (int)(Attack / 2.5f);
@@ -41,15 +44,27 @@ public class MonsterGeneric : MonoBehaviour
             }
         }
 
+        switch(index)
+        {
+            case 0:
+                Animator.SetTrigger("Attack1");
+                break;
+
+            case 1:
+                Animator.SetTrigger("Attack2");
+                break;
+        }
+
         MonsterAttack attack = Attacks[index];
 
         float defenseModified = monster.Defense * TypeVariation(attack.Type, monster.Type);
 
         float damage = CalculateDamage(Attack, attack.Power, defenseModified, Stab(attack.Type));
 
-        Debug.Log(Name + " used " + attack.Name + "\n" + monster.Name + " took " + (int)damage);
+        //Debug.Log(Name + " used " + attack.Name + "\n" + monster.Name + " took " + (int)damage);
 
-        monster.Health -= (int)damage; 
+        monster.Health -= (int)damage;
+        monster.Animator.SetTrigger("IsHit");
 
         if (monster.Health < 0)
         {
@@ -70,25 +85,13 @@ public class MonsterGeneric : MonoBehaviour
             }
             EffectTurns--;
 
-            Debug.Log(Name + " is poisoned");
+            //Debug.Log(Name + " is poisoned");
         }
                 
         if (EffectTurns == 0 && (Effect == "Poisoned" || Effect == "Confused"))
         {
             Effect = "None";
         }
-    }
-
-    public void EnableDefensePosition()
-    {
-        Defense += 5;
-        Attack -= 5;
-    }
-
-    public void DisableDefensePosition()
-    {
-        Defense -= 5;
-        Attack += 5;
     }
 
     float CalculateDamage(int userAttack, int movePower, float enemyDefense, bool hasStab)

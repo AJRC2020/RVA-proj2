@@ -17,6 +17,7 @@ public class CaptureRhinoController : MonoBehaviour
     private Camera cam;
     private bool isCaptured;
     private float hp = 1;
+    private Animator animator;
     
     public delegate void Captured(GameObject monsterUI,Target target);
     public static event Captured OnCaptured;
@@ -27,6 +28,7 @@ public class CaptureRhinoController : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -70,11 +72,13 @@ public class CaptureRhinoController : MonoBehaviour
         {
             hp -= arrowDamage;
             Destroy(other.gameObject);
+            animator.SetTrigger("IsHit");
         }
 
         if (hp <= 0)
         {
             isCaptured = true;
+            animator.SetBool("IsDead", true);
             OnCaptured(AquarhinoCaptureUI, Target.Aquarhin);
         }
         
