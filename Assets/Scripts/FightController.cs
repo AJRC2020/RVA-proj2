@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -41,10 +42,19 @@ public class FightController : MonoBehaviour
     private bool firstMoved = false;
     private float timeout = 1.5f;
 
-    private readonly List<Target> _targetsOnScreen = new List<Target>();
+    private List<Target> _targetsOnScreen;
     private Target _player;
     private Target _enemy;
+    private GameObject _playerObj;
+    private GameObject _enemyObj;
 
+    public GameObject AquarihnObj;
+    public GameObject PyroscarabObj;
+    public GameObject PricklashObj;
+
+    private bool Paused;
+
+    public GameObject UI;
 
     public void OnFindTarget(String target)
     {
@@ -63,7 +73,21 @@ public class FightController : MonoBehaviour
 
     private void CheckForMarkers()
     {
-        if (_targetsOnScreen.Count != 2)
+        
+        var differentTarget = _targetsOnScreen.Exists((target => (target != _player && target != _enemy)));
+        if (differentTarget)
+        {
+            StartCoroutine(RunAwayTimer("Only the monsters battling should be on the field. Remove the extra cards."));
+            return;
+        }
+
+        if (_targetsOnScreen.Count > 2)
+        {
+            StartCoroutine(RunAwayTimer("Only the monsters battling should be on the field. Remove the extra cards."));
+            return;
+        }
+
+        if (_targetsOnScreen.Count < 2)
         {
             if (!_targetsOnScreen.Contains(_player))
             {
@@ -72,51 +96,23 @@ public class FightController : MonoBehaviour
             {
                 StartCoroutine(RunAwayTimer("Cannot find the enemy card (" + _enemy + "). Add it back to the field."));
             }
-            
-            var differentTarget = _targetsOnScreen.FirstOrDefault((target => (target != _player && target != _enemy)));
 
-            if (!differentTarget.Equals(default(Target)))
-            {
-                StartCoroutine(RunAwayTimer("Only the monsters battling should be on the field. Remove the " + differentTarget + " card."));
-            }
-            else
-            {
-                StartCoroutine(RunAwayTimer("Only the monsters battling should be on the field. Remove the extras"));
-
-            }
-        }
-        else
-        {
-            if (_targetsOnScreen.Contains(_player))
-            {
-                if (_targetsOnScreen.Contains(_enemy))
-                {
-                    var differentTarget = _targetsOnScreen.FirstOrDefault((target => (target != _player && target != _enemy)));
-                    if (!differentTarget.Equals(default(Target)))
-                    {
-                        StartCoroutine(RunAwayTimer("Only the monsters battling should be on the field. Remove the " + differentTarget + " card."));
-                        return;
-                    }
-                    
-                    //Markers are correct -> Check Distance and position
-
-                    DontRunAway();
-                }
-                else
-                {
-                    StartCoroutine(RunAwayTimer("Cannot find the enemy card (" + _enemy + "). Add it back to the field."));
-                }
-            }
-            else{
-                StartCoroutine(RunAwayTimer("Cannot find the player card (" + _player + "). Add it back to the field."));
-            }
-            
+            return;
         }
         
+        if (!DistanceUtils.IsBattlePosition(_playerObj, _enemyObj))
+        {
+            StartCoroutine(RunAwayTimer("The cards must be positioned close together and facing each other to battle."));
+            return;
+        }
+                    
+        DontRunAway();
     }
     
     IEnumerator RunAwayTimer(String message)
     {
+        Paused = true;
+        UI.SetActive(false);
         runAwayScreen.SetActive(true);
         messageObj.text = message;
         time.text = "5s";
@@ -141,18 +137,20 @@ public class FightController : MonoBehaviour
     public void RunAway()
     {
         SceneManager.LoadScene("SampleScene");
-
     }
 
     private void DontRunAway()
     {
         StopAllCoroutines();
         runAwayScreen.SetActive(false);
+        UI.SetActive(true);
+        Paused = false;
     }
     
     // Start is called before the first frame update
     void Start()
     {
+        _targetsOnScreen = new List<Target>();
         _player = CaptureInfo.PlayerTarget;
         _enemy = CaptureInfo.EnemyTarget;
         _targetsOnScreen.Add(_player);
@@ -161,70 +159,82 @@ public class FightController : MonoBehaviour
         switch (CaptureInfo.PlayerTarget)
         {
             case Target.Aquarhin:
-                GameObject.Find("PlayerCactusTarget").SetActive(false);
-                GameObject.Find("PlayerInsectTarget").SetActive(false);
-                monster1 = GameObject.Find("PlayerRhinoTarget").GetComponentInChildren<FightRhinoController>();
+                _playerObj = AquarihnObj;
+                monster1 = _playerObj.GetComponentInChildren<FightRhinoController>();
+
                 playerName.text = "Aquarhin";
+                
                 break;
 
             case Target.Pricklash:
-                GameObject.Find("PlayerInsectTarget").SetActive(false);
-                GameObject.Find("PlayerRhinoTarget").SetActive(false);
-                monster1 = GameObject.Find("PlayerCactusTarget").GetComponentInChildren<FightCactusController>();
+                _playerObj = PricklashObj;
                 playerName.text = "Pricklash";
+                monster1 = _playerObj.GetComponentInChildren<FightCactusController>();
+
                 break;
 
             case Target.Pyroscarab:
-                GameObject.Find("PlayerRhinoTarget").SetActive(false);
-                GameObject.Find("PlayerCactusTarget").SetActive(false);
-                monster1 = GameObject.Find("PlayerInsectTarget").GetComponentInChildren<FightInsectController>();
+                _playerObj = PyroscarabObj;
+                monster1 = _playerObj.GetComponentInChildren<FightInsectController>();
+
                 playerName.text = "Pyroscarab";
                 break;
         }
 
+        _playerObj.SetActive(true);
+
+        
         switch (CaptureInfo.EnemyTarget)
         {
             case Target.Aquarhin:
-                GameObject.Find("EnemyCactusTarget").SetActive(false);
-                GameObject.Find("EnemyInsectTarget").SetActive(false);
-                monster2 = GameObject.Find("EnemyRhinoTarget").GetComponentInChildren<FightRhinoController>();
+                _enemyObj = AquarihnObj;
                 enemyName.text = "Aquarhin";
+                monster2 = _enemyObj.GetComponentInChildren<FightRhinoController>();
+
                 break;
 
             case Target.Pricklash:
-                GameObject.Find("EnemyInsectTarget").SetActive(false);
-                GameObject.Find("EnemyRhinoTarget").SetActive(false);
-                monster2 = GameObject.Find("EnemyCactusTarget").GetComponentInChildren<FightCactusController>();
+                _enemyObj = PricklashObj;
                 enemyName.text = "Pricklash";
+                monster2 = _enemyObj.GetComponentInChildren<FightCactusController>();
+
                 break;
 
             case Target.Pyroscarab:
-                GameObject.Find("EnemyRhinoTarget").SetActive(false);
-                GameObject.Find("EnemyCactusTarget").SetActive(false);
-                monster2 = GameObject.Find("EnemyInsectTarget").GetComponentInChildren<FightInsectController>();
+                _enemyObj = PyroscarabObj;
+                monster2 = _enemyObj.GetComponentInChildren<FightInsectController>();
+
                 enemyName.text = "Pyroscarab";
                 break;
         }
+        
+        _enemyObj.SetActive(true);
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
         CheckForMarkers();
-        if (timeout < 0)
-        {
-            if (!isOver)
-            {
-                CheckHealth();
-                FightTurn();
-                UpdateUI();
-            }
 
-            timeout = 1.5f;
-        }
-        else
+        if (!Paused)
         {
-            timeout -= Time.deltaTime;
+            if (timeout < 0)
+            {
+                if (!isOver)
+                {
+                    CheckHealth();
+                    FightTurn();
+                    UpdateUI();
+                }
+
+                timeout = 1.5f;
+            }
+            else
+            {
+                timeout -= Time.deltaTime;
+            }
         }
     }
 

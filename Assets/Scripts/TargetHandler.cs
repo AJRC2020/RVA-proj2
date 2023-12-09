@@ -184,63 +184,31 @@ public class TargetHandler : MonoBehaviour
             // Getting positions and rotations of markers
             var target1 = targetsOnScreen[0];
             var target1Obj = TargetEnumToTargetObject(target1);
-            var position1 = target1Obj.transform.localPosition;
-            var rotation1 = target1Obj.transform.localRotation;
             
             var target2 = targetsOnScreen[1];
             var target2Obj = TargetEnumToTargetObject(target2);
-            var position2 = target2Obj.transform.localPosition;
-            var rotation2 = target2Obj.transform.localRotation;
 
-            // Calculate the vector from the center of one marker to the other
-            UnityEngine.Vector3 direction = position2 - position1;
-            // Check if the markers are close by on the same plane
-            float distanceThreshold = 2.0f; // Adjust this threshold as needed
-            if (direction.magnitude < distanceThreshold)
+            DistanceUtils.IsBattlePosition(target1Obj, target2Obj);
+            
+            Target playerCard = playerCards[0];
+
+            if (playerCards.Count == 2)
             {
-                float angleThreshold = 30f; // Adjust this threshold as needed
-
-                // Calculate the forward vectors of the rotations
-                UnityEngine.Vector3 forward1 = rotation1 * UnityEngine.Vector3.forward;
-                UnityEngine.Vector3 forward2 = rotation2 * UnityEngine.Vector3.forward;
-
-                // Calculate the dot product of the forward vectors
-                float dotProduct1 =  UnityEngine.Vector3.Dot(forward1, direction.normalized);
-                float dotProduct2 =  UnityEngine.Vector3.Dot(forward2, -direction.normalized);
-
-                // Calculate the angles between the forward vectors
-                float angle1 = Mathf.Acos(dotProduct1) * Mathf.Rad2Deg;
-                float angle2 = Mathf.Acos(dotProduct2) * Mathf.Rad2Deg;
-
-
-                // Check if either angle is within the threshold
-                if (angle1 < angleThreshold && angle2 < angleThreshold)
+                if (DistanceUtils.IsClosestToPlayerPlayer1(target1Obj, target2Obj))
                 {
-                    Target playerCard = playerCards[0];
-                    if (playerCards.Count == 2)
-                    {
-                        if (angle1 > angle2)
-                        {
-                            playerCard = target1;
-                            enemyCard = target2;
-                            // Card 1 is facing the right way
-                        }
-                        else
-                        {
-                            playerCard = target2;
-                            enemyCard = target1;
-                            // Card 2 is facing the right way
-                        }
-                    }
-                    
-                    // The markers are facing each other
-
-                    CaptureInfo.PlayerTarget = playerCard;
-                    CaptureInfo.EnemyTarget = enemyCard;
-                    SceneManager.LoadScene("FightScene");
+                    playerCard = target1;
+                    enemyCard = target2;
+                }
+                else
+                {
+                    playerCard = target2;
+                    enemyCard = target1;
                 }
             }
             
+            CaptureInfo.PlayerTarget = playerCard;
+            CaptureInfo.EnemyTarget = enemyCard;
+            SceneManager.LoadScene("FightScene");
 
         } 
     }
