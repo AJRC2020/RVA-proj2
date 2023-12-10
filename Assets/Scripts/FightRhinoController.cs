@@ -31,8 +31,11 @@ public class FightRhinoController : MonsterGeneric
         attack2.HasSpecialEffect = true;
         attack2.SpecialEffect = (enemy) =>
         {
-            enemy.Effect = "Confused";
-            enemy.EffectTurns = 5;
+            if (enemy.Effect != "Confused")
+            {
+                enemy.Effect = "Confused";
+                enemy.EffectTurns = 5;
+            }
         };
 
         Attacks = new List<MonsterAttack> { attack1, attack2 };

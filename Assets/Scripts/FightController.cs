@@ -29,6 +29,8 @@ public class FightController : MonoBehaviour
     public GameObject runAwayScreen;
     public TextMeshProUGUI messageObj;
     public TextMeshProUGUI time;
+    public Button undo;
+    public TextMeshProUGUI fightInfo;
 
     public GameObject markerErrorScreen;
     public TextMeshProUGUI messageMarkerError;
@@ -43,7 +45,8 @@ public class FightController : MonoBehaviour
     private bool firstMoved = false;
     private float timeout = 1.5f;
     private bool playerTurn;
-    
+    private Stack<UndoController> turns = new Stack<UndoController>();
+
     private List<Target> _targetsOnScreen;
     private List<Attacks> _attackMarkersOnScreen;
     private Target _player;
@@ -111,7 +114,7 @@ public class FightController : MonoBehaviour
         
         if (playerAttack == -1) return false;
         markerErrorScreen.SetActive(false);
-        monster1.Fight(playerAttack, monster2);
+        turns.Push(monster1.Fight(playerAttack, monster2, fightInfo));
         playerTurn = false;
 
         return true;
@@ -194,6 +197,16 @@ public class FightController : MonoBehaviour
         time.text = "0s";
 
         RunAway();
+    }
+
+    public void OnUndo()
+    {
+        if (!midTurn && turn > 1)
+        {
+            turn--;
+        }
+        midTurn = !midTurn;
+        turns.Pop().Undo();
     }
 
     public void RunAway()
@@ -285,11 +298,11 @@ public class FightController : MonoBehaviour
 
         if (!Paused && !isOver)
         {
+            UpdateUI();
             if (timeout < 0)
             {
-                CheckHealth();
                 FightTurn();
-                UpdateUI();
+                CheckHealth();
                 timeout = 1.5f;
             }
             else
@@ -312,7 +325,7 @@ public class FightController : MonoBehaviour
             if (midTurn)
             {
                 playerTurn = false;
-                monster2.Fight(RandomAttack(), monster1);
+                turns.Push(monster2.Fight(RandomAttack(), monster1, fightInfo));
                 midTurn = false;
                 turn++;
                 playerTurn = true;
@@ -329,7 +342,7 @@ public class FightController : MonoBehaviour
             if (midTurn && firstMoved)
             {
                 playerTurn = false;
-                monster2.Fight(RandomAttack(), monster1);
+                turns.Push(monster2.Fight(RandomAttack(), monster1, fightInfo));
                 midTurn = false;
                 turn++;
                 playerTurn = true;
@@ -354,7 +367,7 @@ public class FightController : MonoBehaviour
                 {
                     playerTurn = false;
 
-                    monster2.Fight(RandomAttack(), monster1);
+                    turns.Push(monster2.Fight(RandomAttack(), monster1, fightInfo));
                     firstMoved = false;
                     midTurn = true;
                     playerTurn = true;
@@ -374,14 +387,12 @@ public class FightController : MonoBehaviour
             {
                 playerTurn = false;
 
-                monster2.Fight(RandomAttack(), monster1);
+                turns.Push(monster2.Fight(RandomAttack(), monster1, fightInfo));
                 midTurn = true;
                 playerTurn = true;
 
             }
         }
-
-        //Debug.Log("Player Health = " + monster1.Health + " Enemy Health = " + monster2.Health);
     }
 
     private bool RNG(float threshold)
@@ -434,9 +445,26 @@ public class FightController : MonoBehaviour
         {
             playerHealthFill.color = Color.red;
         }
+        else
+        {
+            playerHealthFill.color = Color.green;
+        }
         if (enemyHealth.value < 0.25f)
         {
             enemyHealthFill.color = Color.red;
+        }
+        else
+        {
+            enemyHealthFill.color = Color.green;
+        }
+
+        if (turn == 1 && !midTurn)
+        {
+            undo.enabled = false;
+        }
+        else
+        {
+            undo.enabled = true;
         }
 
         turnText.text = (playerTurn ? "It's your " : "It's the enemy's ") + "turn";
