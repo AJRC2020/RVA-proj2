@@ -226,7 +226,7 @@ public class FightController : MonoBehaviour
     void Start()
     {
         Screen.orientation = ScreenOrientation.AutoRotation;
-
+        CaptureInfo.battleEnded = false;
         _targetsOnScreen = new List<Target>();
         _attackMarkersOnScreen = new List<Attacks>();
         _player = CaptureInfo.PlayerTarget;
