@@ -2,9 +2,7 @@ using System;
 using DefaultNamespace;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -76,25 +74,25 @@ public class FightController : MonoBehaviour
 
 
 
-    private void PlayerAttack()
+    private bool PlayerAttack()
     {
-        int playerAttack = -1;
+        Debug.Log(_attackMarkersOnScreen.Count);
+        int playerAttack;
         if (_attackMarkersOnScreen.Count > 1)
         {
             markerErrorScreen.SetActive(true);
             messageMarkerError.text = "Make sure to only have one attack on screen at the any time";
             titleMarkerError.text = "Too many attack indicators are on screen";
-            playerAttack = -1 ;
+            return false;
         }
-
         if (_attackMarkersOnScreen.Count == 0)
         {
             markerErrorScreen.SetActive(true);
-            messageMarkerError.text = "You have not selected an attack";
-            titleMarkerError.text = "Put an attack marker in the field of view to perform an attack";
-            playerAttack = -1 ;
+            titleMarkerError.text = "You have not selected an attack";
+            messageMarkerError.text = "Put an attack marker in the field of view to perform an attack";
+            return false;
         }
-
+        
         switch (_attackMarkersOnScreen[0])
         {
             case Attacks.Normal:
@@ -108,9 +106,11 @@ public class FightController : MonoBehaviour
                 break;
         }
         
-        if (playerAttack == -1) return;
+        
+        if (playerAttack == -1) return false;
         markerErrorScreen.SetActive(false);
         monster1.Fight(playerAttack, monster2);
+        return true;
     }
     
 
@@ -276,17 +276,14 @@ public class FightController : MonoBehaviour
     {
         CheckForMarkers();
 
-        if (!Paused)
+        if (!Paused && !isOver)
         {
             if (timeout < 0)
             {
-                if (!isOver)
-                {
-                    CheckHealth();
-                    FightTurn();
-                    UpdateUI();
-                }
-
+         
+                CheckHealth();
+                FightTurn();
+                UpdateUI();
                 timeout = 1.5f;
             }
             else
@@ -294,6 +291,12 @@ public class FightController : MonoBehaviour
                 timeout -= Time.deltaTime;
             }
         }
+
+        if (isOver)
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
+        
     }
 
     private void FightTurn()
@@ -308,7 +311,7 @@ public class FightController : MonoBehaviour
             }
             else
             {
-                PlayerAttack();
+                if (!PlayerAttack()) return;
                 midTurn = true;
             }
         }
@@ -322,7 +325,7 @@ public class FightController : MonoBehaviour
             }
             else if (midTurn)
             {
-                PlayerAttack();
+                if (!PlayerAttack()) return;
                 midTurn = false;
                 turn++;
             }
@@ -330,7 +333,7 @@ public class FightController : MonoBehaviour
             {
                 if (RNG(0.5f))
                 {
-                    PlayerAttack();
+                    if (!PlayerAttack()) return;
                     firstMoved = true;
                     midTurn = true;
                 }
@@ -346,7 +349,7 @@ public class FightController : MonoBehaviour
         {
             if (midTurn)
             {
-                PlayerAttack();
+                if (!PlayerAttack()) return;
                 midTurn = false;
                 turn++;
             }
@@ -384,16 +387,21 @@ public class FightController : MonoBehaviour
             isOver = true;
             winner = 1;
             monster1.Animator.SetBool("IsDead", true);
+            CaptureInfo.PlayerWon = false;
+            CaptureInfo.battleEnded = true;
             return;
         }
         if (monster2.Health == 0)
         {
             isOver = true;
             CaptureInfo.capturedTargets.Add(_enemy);
+            CaptureInfo.PlayerWon = true;
             monster2.Animator.SetBool("IsDead", true);
             winner = 2;
-            return;
+            CaptureInfo.battleEnded = true;
         }
+        
+        
     }
 
     private void UpdateUI()

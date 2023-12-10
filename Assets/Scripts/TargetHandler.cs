@@ -1,13 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using DefaultNamespace;
 using TMPro;
 using UnityEngine;
-using Vector3 = System.Numerics.Vector3;
-using UnityEngine.SceneManagement;
-using Vuforia;
 
 public class TargetHandler : MonoBehaviour
 {
@@ -20,8 +15,9 @@ public class TargetHandler : MonoBehaviour
 
     public GameObject detectMessage;
     public GameObject capturedMessage;
+    public GameObject battleStartUI;
 
-
+    private bool checkForBattle;
     public delegate void MultipleTargetsDetected();
 
     public static event MultipleTargetsDetected OnMultipleTargetsDetected;
@@ -32,12 +28,32 @@ public class TargetHandler : MonoBehaviour
     
     private void Start()
     {
+        checkForBattle = true;
         targetsOnScreen = new List<Target>();
         TargetController.onTargetEnable += EnableTarget;
         TargetController.onTargetDisabled += DisableTarget;
         CaptureRhinoController.OnCaptured += OnCaptured;
         CaptureCactusController.OnCaptured += OnCaptured;
         CaptureInsectController.OnCaptured += OnCaptured;
+        BattlePromptController.OnBattlePromptCooldown += OnBattlePromptCooldown;
+
+        if (CaptureInfo.battleEnded)
+        {
+            OnBattlePromptCooldown();
+            if (CaptureInfo.PlayerWon)
+            {
+                capturedMessage.GetComponent<TextMeshProUGUI>().text ="Your " + CaptureInfo.PlayerTarget + " won the battle!";
+            }
+            else
+            {
+                capturedMessage.GetComponent<TextMeshProUGUI>().text = CaptureInfo.EnemyTarget +" won the battle. Better luck next time.";
+
+            }
+            
+            capturedMessage.SetActive(true);
+            StartCoroutine(DeactivateCapturedImage());
+        }
+        
     }
     
         
@@ -48,6 +64,14 @@ public class TargetHandler : MonoBehaviour
         CaptureRhinoController.OnCaptured -= OnCaptured;
         CaptureCactusController.OnCaptured -= OnCaptured;
         CaptureInsectController.OnCaptured -= OnCaptured;
+        BattlePromptController.OnBattlePromptCooldown -= OnBattlePromptCooldown;
+    }
+    
+    private void OnBattlePromptCooldown()
+    {
+        battleStartUI.SetActive(false);
+        checkForBattle = false;
+        StartCoroutine(ActivateBattleCheck());
 
     }
 
@@ -62,10 +86,6 @@ public class TargetHandler : MonoBehaviour
 
             if (!CaptureInfo.capturedTargets.Contains(target))
             {
-                if (capturedMessage.activeSelf)
-                {
-                    capturedMessage.SetActive(false);
-                }
                 monsterUI.SetActive(true);
             }
         }
@@ -88,10 +108,6 @@ public class TargetHandler : MonoBehaviour
 
         if (targetsOnScreen.Count == 1)
         {
-            if (capturedMessage.activeSelf)
-            {
-                capturedMessage.SetActive(false);
-            }
             OnOneTargetDetected(CaptureInfo.capturedTargets);
         }
 
@@ -116,10 +132,20 @@ public class TargetHandler : MonoBehaviour
         yield return new WaitForSeconds(3);
         capturedMessage.SetActive(false);
     }
+    
+    IEnumerator ActivateBattleCheck()
+    {
+        yield return new WaitForSeconds(3);
+        checkForBattle = true;
+    }
 
     private void Update()
     {
-        CheckIfBattle();
+        if (checkForBattle)
+        {
+            CheckIfBattle();
+
+        }
         UpdateMessage();
     }
 
@@ -188,7 +214,10 @@ public class TargetHandler : MonoBehaviour
             var target2 = targetsOnScreen[1];
             var target2Obj = TargetEnumToTargetObject(target2);
 
-            DistanceUtils.IsBattlePosition(target1Obj, target2Obj);
+            if (!DistanceUtils.IsBattlePosition(target1Obj, target2Obj))
+            {
+                return;
+            }
             
             Target playerCard = playerCards[0];
 
@@ -208,7 +237,7 @@ public class TargetHandler : MonoBehaviour
             
             CaptureInfo.PlayerTarget = playerCard;
             CaptureInfo.EnemyTarget = enemyCard;
-            SceneManager.LoadScene("FightScene");
+            battleStartUI.SetActive(true);
 
         } 
     }
