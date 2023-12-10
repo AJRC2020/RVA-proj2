@@ -27,20 +27,35 @@ public class MonsterGeneric : MonoBehaviour
 
     public List<MonsterAttack> Attacks { get; set; }
 
-    public void Fight(int index, MonsterGeneric monster)
+    public UndoController Fight(int index, MonsterGeneric monster)
     {
+        UndoController turn = new UndoController();
+        turn.attacker = this;
+        turn.defender = monster;
+        turn.attack = index;
+
         if (EffectTurns != 0 && Effect == "Confused") 
         {
+            turn.effected = true;
+            turn.firstEffectedTurn = false;
+            turn.effect = "Confused";
+            Debug.Log(Name + " is Confused. Turns left: " + EffectTurns);
             EffectTurns--;
-            //Debug.Log(Name + " is Confused");
             if (Random.Range(0, 1) > 0.75f)
             {
+                int deficit1 = 0;
+
                 Health -= (int)(Attack / 2.5f);
                 if (Health < 0)
                 {
+                    deficit1 = Health;
                     Health = 0;
                 }
-                return;
+
+                turn.effectedDamage = (int)(Attack / 2.5f) + deficit1;
+                turn.damage = 0;
+
+                return turn;
             }
         }
 
@@ -61,37 +76,67 @@ public class MonsterGeneric : MonoBehaviour
 
         float damage = CalculateDamage(Attack, attack.Power, defenseModified, Stab(attack.Type));
 
-        //Debug.Log(Name + " used " + attack.Name + "\n" + monster.Name + " took " + (int)damage);
+        Debug.Log(Name + " used " + attack.Name + "\n" + monster.Name + " took " + (int)damage);
 
         monster.Health -= (int)damage;
         monster.Animator.SetTrigger("IsHit");
 
+        int deficit2 = 0;
+
         if (monster.Health < 0)
         {
+            deficit2 = Health;
             monster.Health = 0;
         }
+
+        turn.damage = (int)(damage) + deficit2;
 
         if (attack.HasSpecialEffect) 
         {
             attack.SpecialEffect?.Invoke(monster);
+            Debug.Log("Monster turns = " + monster.EffectTurns);
+            if (monster.EffectTurns == 5)
+            {
+                turn.firstEffectedTurn = true;
+                turn.effected = true;
+                turn.effectedDamage = 0;
+                turn.effect = monster.Effect;
+            }
         }
 
         if (EffectTurns != 0 && Effect == "Poisoned")
         {
+            turn.effected = true;
+            turn.firstEffectedTurn = false;
+            turn.effect = "Poisoned";
+            int deficit3 = 0;
             Health -= MaxHealth / 9;
             if (Health < 0)
             {
+                deficit3 = Health;
                 Health = 0;
             }
+            turn.effectedDamage = MaxHealth / 9 + deficit3;
+            Debug.Log(Name + " is poisoned. Turns left: " + EffectTurns);
             EffectTurns--;
+        }
 
-            //Debug.Log(Name + " is poisoned");
+        if (EffectTurns != 0 && Effect == "Burned")
+        {
+            turn.effected = true;
+            turn.firstEffectedTurn = false;
+            turn.effect = "Burned";
+            turn.effectedDamage = 0;
+            Debug.Log(Name + " is burned. Turns left: " + EffectTurns);
+            EffectTurns--;
         }
                 
-        if (EffectTurns == 0 && (Effect == "Poisoned" || Effect == "Confused"))
+        if (EffectTurns == 0 && (Effect == "Poisoned" || Effect == "Confused" || Effect == "Burned"))
         {
             Effect = "None";
         }
+
+        return turn;
     }
 
     float CalculateDamage(int userAttack, int movePower, float enemyDefense, bool hasStab)

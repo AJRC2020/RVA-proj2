@@ -31,6 +31,7 @@ public class FightController : MonoBehaviour
     public GameObject runAwayScreen;
     public TextMeshProUGUI messageObj;
     public TextMeshProUGUI time;
+    public Button undo;
 
     public GameObject markerErrorScreen;
     public TextMeshProUGUI messageMarkerError;
@@ -44,6 +45,7 @@ public class FightController : MonoBehaviour
     private bool midTurn = false;
     private bool firstMoved = false;
     private float timeout = 1.5f;
+    private Stack<UndoController> turns = new Stack<UndoController>();
 
     private List<Target> _targetsOnScreen;
     private List<Attacks> _attackMarkersOnScreen;
@@ -110,7 +112,7 @@ public class FightController : MonoBehaviour
         
         if (playerAttack == -1) return;
         markerErrorScreen.SetActive(false);
-        monster1.Fight(playerAttack, monster2);
+        turns.Push(monster1.Fight(playerAttack, monster2));
     }
     
 
@@ -126,6 +128,16 @@ public class FightController : MonoBehaviour
         Enum.TryParse(attack, out Attacks attackEnum);
 
         _attackMarkersOnScreen.Remove(attackEnum);
+    }
+
+    public void OnUndo()
+    {
+        if (!midTurn && turn > 1)
+        {
+            turn--;
+        }
+        midTurn = !midTurn;
+        turns.Pop().Undo();
     }
 
     private void CheckForMarkers()
@@ -284,7 +296,6 @@ public class FightController : MonoBehaviour
                 {
                     CheckHealth();
                     FightTurn();
-                    UpdateUI();
                 }
 
                 timeout = 1.5f;
@@ -293,6 +304,7 @@ public class FightController : MonoBehaviour
             {
                 timeout -= Time.deltaTime;
             }
+            UpdateUI();
         }
     }
 
@@ -302,7 +314,7 @@ public class FightController : MonoBehaviour
         {
             if (midTurn)
             {
-                monster2.Fight(RandomAttack(), monster1);
+                turns.Push(monster2.Fight(RandomAttack(), monster1));
                 midTurn = false;
                 turn++;
             }
@@ -316,7 +328,7 @@ public class FightController : MonoBehaviour
         {
             if (midTurn && firstMoved)
             {
-                monster2.Fight(RandomAttack(), monster1);
+                turns.Push(monster2.Fight(RandomAttack(), monster1));
                 midTurn = false;
                 turn++;
             }
@@ -336,7 +348,7 @@ public class FightController : MonoBehaviour
                 }
                 else
                 {
-                    monster2.Fight(RandomAttack(), monster1);
+                    turns.Push(monster2.Fight(RandomAttack(), monster1));
                     firstMoved = false;
                     midTurn = true;
                 }
@@ -352,7 +364,7 @@ public class FightController : MonoBehaviour
             }
             else
             {
-                monster2.Fight(RandomAttack(), monster1);
+                turns.Push(monster2.Fight(RandomAttack(), monster1));
                 midTurn = true;
             }
         }
@@ -405,9 +417,26 @@ public class FightController : MonoBehaviour
         {
             playerHealthFill.color = Color.red;
         }
+        else
+        {
+            playerHealthFill.color = Color.green;
+        }
         if (enemyHealth.value < 0.25f)
         {
             enemyHealthFill.color = Color.red;
+        }
+        else
+        {
+            enemyHealthFill.color = Color.green;
+        }
+
+        if (turn == 1 && !midTurn)
+        {
+            undo.enabled = false;
+        } 
+        else
+        {
+            undo.enabled = true;
         }
 
         turnText.text = "Turn " + turn;

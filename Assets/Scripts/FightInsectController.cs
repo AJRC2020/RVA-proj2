@@ -35,8 +35,7 @@ public class FightInsectController : MonsterGeneric
             {
                 enemy.Effect = "Burned";
                 enemy.Defense -= 3;
-
-                Debug.Log(enemy.Name + " is burned");
+                enemy.EffectTurns = 5;
             }
         };
 
