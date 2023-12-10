@@ -31,8 +31,11 @@ public class FightCactusController : MonsterGeneric
         attack2.HasSpecialEffect = true;
         attack2.SpecialEffect = (enemy) =>
         {
-            enemy.Effect = "Poisoned";
-            enemy.EffectTurns = 5;
+            if (enemy.Effect != "Poisoned")
+            {
+                enemy.Effect = "Poisoned";
+                enemy.EffectTurns = 5;
+            }
         };
 
         Attacks = new List<MonsterAttack> { attack1, attack2 };
