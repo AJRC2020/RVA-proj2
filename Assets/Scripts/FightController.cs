@@ -291,12 +291,13 @@ public class FightController : MonoBehaviour
 
         if (!Paused)
         {
+            UpdateUI();
             if (timeout < 0)
             {
                 if (!isOver)
                 {
-                    CheckHealth();
                     FightTurn();
+                    CheckHealth();
                 }
 
                 timeout = 1.5f;
@@ -305,7 +306,6 @@ public class FightController : MonoBehaviour
             {
                 timeout -= Time.deltaTime;
             }
-            UpdateUI();
         }
     }
 
