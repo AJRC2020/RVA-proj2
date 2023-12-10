@@ -32,6 +32,7 @@ public class FightController : MonoBehaviour
     public TextMeshProUGUI messageObj;
     public TextMeshProUGUI time;
     public Button undo;
+    public TextMeshProUGUI fightInfo;
 
     public GameObject markerErrorScreen;
     public TextMeshProUGUI messageMarkerError;
@@ -112,7 +113,7 @@ public class FightController : MonoBehaviour
         
         if (playerAttack == -1) return;
         markerErrorScreen.SetActive(false);
-        turns.Push(monster1.Fight(playerAttack, monster2));
+        turns.Push(monster1.Fight(playerAttack, monster2, fightInfo));
     }
     
 
@@ -314,7 +315,7 @@ public class FightController : MonoBehaviour
         {
             if (midTurn)
             {
-                turns.Push(monster2.Fight(RandomAttack(), monster1));
+                turns.Push(monster2.Fight(RandomAttack(), monster1, fightInfo));
                 midTurn = false;
                 turn++;
             }
@@ -328,7 +329,7 @@ public class FightController : MonoBehaviour
         {
             if (midTurn && firstMoved)
             {
-                turns.Push(monster2.Fight(RandomAttack(), monster1));
+                turns.Push(monster2.Fight(RandomAttack(), monster1, fightInfo));
                 midTurn = false;
                 turn++;
             }
@@ -348,7 +349,7 @@ public class FightController : MonoBehaviour
                 }
                 else
                 {
-                    turns.Push(monster2.Fight(RandomAttack(), monster1));
+                    turns.Push(monster2.Fight(RandomAttack(), monster1, fightInfo));
                     firstMoved = false;
                     midTurn = true;
                 }
@@ -364,12 +365,10 @@ public class FightController : MonoBehaviour
             }
             else
             {
-                turns.Push(monster2.Fight(RandomAttack(), monster1));
+                turns.Push(monster2.Fight(RandomAttack(), monster1, fightInfo));
                 midTurn = true;
             }
         }
-
-        //Debug.Log("Player Health = " + monster1.Health + " Enemy Health = " + monster2.Health);
     }
 
     private bool RNG(float threshold)

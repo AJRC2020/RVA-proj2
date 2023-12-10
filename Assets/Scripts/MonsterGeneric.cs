@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 
 public class MonsterGeneric : MonoBehaviour
@@ -27,19 +28,37 @@ public class MonsterGeneric : MonoBehaviour
 
     public List<MonsterAttack> Attacks { get; set; }
 
-    public UndoController Fight(int index, MonsterGeneric monster)
+    public UndoController Fight(int index, MonsterGeneric monster, TextMeshProUGUI info)
     {
         UndoController turn = new UndoController();
         turn.attacker = this;
         turn.defender = monster;
         turn.attack = index;
+        info.text = "";
+
+        switch(Name)
+        {
+            case "Aquarhin":
+                info.color = new Color(0, 0, 0.5f);
+                break;
+
+            case "Pricklash":
+                info.color = new Color(0, 0.5f, 0);
+                break;
+
+            case "Pyroscarab":
+                info.color = new Color(0.5f, 0, 0);
+                break;
+        }
 
         if (EffectTurns != 0 && Effect == "Confused") 
         {
             turn.effected = true;
             turn.firstEffectedTurn = false;
             turn.effect = "Confused";
-            Debug.Log(Name + " is Confused. Turns left: " + EffectTurns);
+
+            info.text += Name + " is confused\n";
+
             EffectTurns--;
             if (Random.Range(0, 1) > 0.75f)
             {
@@ -54,6 +73,8 @@ public class MonsterGeneric : MonoBehaviour
 
                 turn.effectedDamage = (int)(Attack / 2.5f) + deficit1;
                 turn.damage = 0;
+
+                info.text += "It hit itself";
 
                 return turn;
             }
@@ -76,7 +97,7 @@ public class MonsterGeneric : MonoBehaviour
 
         float damage = CalculateDamage(Attack, attack.Power, defenseModified, Stab(attack.Type));
 
-        Debug.Log(Name + " used " + attack.Name + "\n" + monster.Name + " took " + (int)damage);
+        info.text += Name + " used " + attack.Name + "\n" + monster.Name + " took " + (int)damage;
 
         monster.Health -= (int)damage;
         monster.Animator.SetTrigger("IsHit");
@@ -94,7 +115,7 @@ public class MonsterGeneric : MonoBehaviour
         if (attack.HasSpecialEffect) 
         {
             attack.SpecialEffect?.Invoke(monster);
-            Debug.Log("Monster turns = " + monster.EffectTurns);
+
             if (monster.EffectTurns == 5)
             {
                 turn.firstEffectedTurn = true;
@@ -109,6 +130,7 @@ public class MonsterGeneric : MonoBehaviour
             turn.effected = true;
             turn.firstEffectedTurn = false;
             turn.effect = "Poisoned";
+
             int deficit3 = 0;
             Health -= MaxHealth / 9;
             if (Health < 0)
@@ -117,7 +139,9 @@ public class MonsterGeneric : MonoBehaviour
                 Health = 0;
             }
             turn.effectedDamage = MaxHealth / 9 + deficit3;
-            Debug.Log(Name + " is poisoned. Turns left: " + EffectTurns);
+
+            info.text += "\n" + Name + " is poisoned";
+
             EffectTurns--;
         }
 
@@ -127,7 +151,9 @@ public class MonsterGeneric : MonoBehaviour
             turn.firstEffectedTurn = false;
             turn.effect = "Burned";
             turn.effectedDamage = 0;
-            Debug.Log(Name + " is burned. Turns left: " + EffectTurns);
+
+            info.text += "\n" + Name + " is burned";
+
             EffectTurns--;
         }
                 
