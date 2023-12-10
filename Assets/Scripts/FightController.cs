@@ -212,6 +212,8 @@ public class FightController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Screen.orientation = ScreenOrientation.AutoRotation;
+
         _targetsOnScreen = new List<Target>();
         _attackMarkersOnScreen = new List<Attacks>();
         _player = CaptureInfo.PlayerTarget;

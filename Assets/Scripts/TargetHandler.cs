@@ -28,6 +28,7 @@ public class TargetHandler : MonoBehaviour
     
     private void Start()
     {
+        Screen.orientation = ScreenOrientation.Portrait;
         checkForBattle = true;
         targetsOnScreen = new List<Target>();
         TargetController.onTargetEnable += EnableTarget;

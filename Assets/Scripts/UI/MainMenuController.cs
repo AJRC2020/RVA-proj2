@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,6 +11,10 @@ public class MainMenuController : MonoBehaviour
     public GameObject credits;
     public GameObject instructions;
 
+    private void Start()
+    {
+        Screen.orientation = ScreenOrientation.Portrait;
+    }
 
     public void Play()
     {
