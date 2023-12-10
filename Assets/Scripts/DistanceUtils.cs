@@ -30,52 +30,6 @@
 
             return angle1 > angle2;
         }
-
-        // TODO: Not tested...
-        public static void MarkerIsOnSide(GameObject smallerMarker, GameObject biggerMarker)
-        {
-            // Get positions and rotations
-            Transform largerMarkerTransform = biggerMarker.transform;
-            Transform smallerMarkerTransform = smallerMarker.transform;
-
-            Vector3 largerMarkerPosition = largerMarkerTransform.position;
-            Vector3 smallerMarkerPosition = smallerMarkerTransform.position;
-
-            Quaternion largerMarkerRotation = largerMarkerTransform.rotation;
-            Quaternion smallerMarkerRotation = smallerMarkerTransform.rotation;
-
-            // Check if the smaller marker is pointing at the bottom of the larger marker
-            Vector3 directionToLargerMarker = (largerMarkerPosition - smallerMarkerPosition).normalized;
-            float dotProduct = Vector3.Dot(directionToLargerMarker, smallerMarkerTransform.up);
-
-            if (dotProduct < 0)
-            {
-                // Smaller marker is pointing at the bottom of the larger marker
-
-                // Determine if the smaller marker is on the left or right
-                Vector3 crossProduct = Vector3.Cross(smallerMarkerTransform.up, directionToLargerMarker);
-    
-                if (crossProduct.y > 0)
-                {
-                    Debug.Log("Smaller marker is on the left and pointing at the bottom of the larger marker!");
-                }
-                else if (crossProduct.y < 0)
-                {
-                    Debug.Log("Smaller marker is on the right and pointing at the bottom of the larger marker!");
-                }
-                else
-                {
-                    // The markers have the same y-coordinate (could be considered as aligned)
-                    Debug.Log("Smaller marker is pointing at the bottom, but its position is aligned with the larger marker.");
-                }
-            }
-            else
-            {
-                // Smaller marker is not pointing at the bottom of the larger marker
-                Debug.Log("Smaller marker is not pointing at the bottom of the larger marker.");
-            }
-
-        }
         
         public static bool IsBattlePosition(GameObject target1Obj, GameObject target2Obj)
         {

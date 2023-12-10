@@ -32,6 +32,9 @@ public class FightController : MonoBehaviour
     public TextMeshProUGUI messageObj;
     public TextMeshProUGUI time;
 
+    public GameObject markerErrorScreen;
+    public TextMeshProUGUI messageMarkerError;
+    public TextMeshProUGUI titleMarkerError;
 
     private MonsterGeneric monster1;
     private MonsterGeneric monster2;
@@ -43,6 +46,7 @@ public class FightController : MonoBehaviour
     private float timeout = 1.5f;
 
     private List<Target> _targetsOnScreen;
+    private List<Attacks> _attackMarkersOnScreen;
     private Target _player;
     private Target _enemy;
     private GameObject _playerObj;
@@ -53,7 +57,6 @@ public class FightController : MonoBehaviour
     public GameObject PricklashObj;
 
     private bool Paused;
-
     public GameObject UI;
 
     public void OnFindTarget(String target)
@@ -69,6 +72,60 @@ public class FightController : MonoBehaviour
 
         Enum.TryParse(target, out Target targetEnum);
         _targetsOnScreen.Remove(targetEnum);
+    }
+
+
+
+    private void PlayerAttack()
+    {
+        int playerAttack = -1;
+        if (_attackMarkersOnScreen.Count > 1)
+        {
+            markerErrorScreen.SetActive(true);
+            messageMarkerError.text = "Make sure to only have one attack on screen at the any time";
+            titleMarkerError.text = "Too many attack indicators are on screen";
+            playerAttack = -1 ;
+        }
+
+        if (_attackMarkersOnScreen.Count == 0)
+        {
+            markerErrorScreen.SetActive(true);
+            messageMarkerError.text = "You have not selected an attack";
+            titleMarkerError.text = "Put an attack marker in the field of view to perform an attack";
+            playerAttack = -1 ;
+        }
+
+        switch (_attackMarkersOnScreen[0])
+        {
+            case Attacks.Normal:
+                playerAttack = 0;
+                break;
+            case Attacks.Special:
+                playerAttack = 1;
+                break;
+            default:
+                playerAttack = -1;
+                break;
+        }
+        
+        if (playerAttack == -1) return;
+        markerErrorScreen.SetActive(false);
+        monster1.Fight(playerAttack, monster2);
+    }
+    
+
+    public void OnFindAttack(String attack)
+    {
+        Enum.TryParse(attack, out Attacks attackEnum);
+        _attackMarkersOnScreen.Add(attackEnum);
+
+    }
+    
+    public void OnLoseAttack(String attack)
+    {
+        Enum.TryParse(attack, out Attacks attackEnum);
+
+        _attackMarkersOnScreen.Remove(attackEnum);
     }
 
     private void CheckForMarkers()
@@ -151,6 +208,7 @@ public class FightController : MonoBehaviour
     void Start()
     {
         _targetsOnScreen = new List<Target>();
+        _attackMarkersOnScreen = new List<Attacks>();
         _player = CaptureInfo.PlayerTarget;
         _enemy = CaptureInfo.EnemyTarget;
         _targetsOnScreen.Add(_player);
@@ -250,7 +308,7 @@ public class FightController : MonoBehaviour
             }
             else
             {
-                monster1.Fight(RandomAttack(), monster2);
+                PlayerAttack();
                 midTurn = true;
             }
         }
@@ -264,7 +322,7 @@ public class FightController : MonoBehaviour
             }
             else if (midTurn)
             {
-                monster1.Fight(RandomAttack(), monster2);
+                PlayerAttack();
                 midTurn = false;
                 turn++;
             }
@@ -272,7 +330,7 @@ public class FightController : MonoBehaviour
             {
                 if (RNG(0.5f))
                 {
-                    monster1.Fight(RandomAttack(), monster2);
+                    PlayerAttack();
                     firstMoved = true;
                     midTurn = true;
                 }
@@ -288,7 +346,7 @@ public class FightController : MonoBehaviour
         {
             if (midTurn)
             {
-                monster1.Fight(RandomAttack(), monster2);
+                PlayerAttack();
                 midTurn = false;
                 turn++;
             }
@@ -331,6 +389,7 @@ public class FightController : MonoBehaviour
         if (monster2.Health == 0)
         {
             isOver = true;
+            CaptureInfo.capturedTargets.Add(_enemy);
             monster2.Animator.SetBool("IsDead", true);
             winner = 2;
             return;
