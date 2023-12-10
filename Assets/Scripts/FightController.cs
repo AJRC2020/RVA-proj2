@@ -42,7 +42,8 @@ public class FightController : MonoBehaviour
     private bool midTurn = false;
     private bool firstMoved = false;
     private float timeout = 1.5f;
-
+    private bool playerTurn;
+    
     private List<Target> _targetsOnScreen;
     private List<Attacks> _attackMarkersOnScreen;
     private Target _player;
@@ -76,6 +77,7 @@ public class FightController : MonoBehaviour
 
     private bool PlayerAttack()
     {
+        playerTurn = true;
         Debug.Log(_attackMarkersOnScreen.Count);
         int playerAttack;
         if (_attackMarkersOnScreen.Count > 1)
@@ -110,7 +112,10 @@ public class FightController : MonoBehaviour
         if (playerAttack == -1) return false;
         markerErrorScreen.SetActive(false);
         monster1.Fight(playerAttack, monster2);
+        playerTurn = false;
+
         return true;
+        
     }
     
 
@@ -280,7 +285,6 @@ public class FightController : MonoBehaviour
         {
             if (timeout < 0)
             {
-         
                 CheckHealth();
                 FightTurn();
                 UpdateUI();
@@ -305,9 +309,12 @@ public class FightController : MonoBehaviour
         {
             if (midTurn)
             {
+                playerTurn = false;
                 monster2.Fight(RandomAttack(), monster1);
                 midTurn = false;
                 turn++;
+                playerTurn = true;
+
             }
             else
             {
@@ -319,9 +326,12 @@ public class FightController : MonoBehaviour
         {
             if (midTurn && firstMoved)
             {
+                playerTurn = false;
                 monster2.Fight(RandomAttack(), monster1);
                 midTurn = false;
                 turn++;
+                playerTurn = true;
+
             }
             else if (midTurn)
             {
@@ -336,12 +346,17 @@ public class FightController : MonoBehaviour
                     if (!PlayerAttack()) return;
                     firstMoved = true;
                     midTurn = true;
+                    
                 }
                 else
                 {
+                    playerTurn = false;
+
                     monster2.Fight(RandomAttack(), monster1);
                     firstMoved = false;
                     midTurn = true;
+                    playerTurn = true;
+
                 }
             }
         }
@@ -355,8 +370,12 @@ public class FightController : MonoBehaviour
             }
             else
             {
+                playerTurn = false;
+
                 monster2.Fight(RandomAttack(), monster1);
                 midTurn = true;
+                playerTurn = true;
+
             }
         }
 
@@ -418,7 +437,7 @@ public class FightController : MonoBehaviour
             enemyHealthFill.color = Color.red;
         }
 
-        turnText.text = "Turn " + turn;
+        turnText.text = (playerTurn ? "It's your " : "It's the enemy's ") + "turn";
 
         switch(monster1.Effect)
         {
